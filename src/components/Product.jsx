@@ -20,7 +20,7 @@ const Product = ({ productData, isNew, widthImg }) => {
         onMouseLeave={() => setShowOption(false)}
         onMouseDown={() => setIsDragging(true)} // Khi bắt đầu kéo chuột
         onMouseUp={() => setIsDragging(false)} // Khi thả chuột
-        to={`/${paths.DETAIL_PRODUCT}/${productData._id}/${productData.title}`}
+        to={`/${productData?.category?.toLowerCase()}/${productData._id}/${productData.title}`}
         onClick={(e) => {
           if (isDragging) {
             e.preventDefault(); // Ngăn chặn chuyển trang khi đang kéo chuột

@@ -15,7 +15,7 @@ export const formatMoney = number => {
 
 export const ratingStar = (number, size) => {
     const star = []
-    for (let index = 0; index < number; index++) {star.push(<BsStarFill size={size} color="orange"/>)}
-    for (let index = 5; index > number; index--) {star.push(<BsStar size={size} color="orange"/>)}
+    for (let index = 0; index < number; index++) {star.push(<BsStarFill size={size} key={index} color="orange"/>)}
+    for (let index = 5; index > number; index--) {star.push(<BsStar size={size} key={index} color="orange"/>)}
     return star
 }

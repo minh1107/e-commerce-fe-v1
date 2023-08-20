@@ -7,3 +7,4 @@ export {default as Product} from "./Product";
 export {default as SelectOption} from "./common/SelectOption";
 export {default as CountDown} from './CountDown'
 export {default as Footer} from './Footer/Footer'   
+export {default as BreadCrumb} from './BreadCrumb/BreadCrumb'   

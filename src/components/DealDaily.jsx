@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useState } from 'react'
 import icons from '../utils/icons'
-import { apiGetProduct } from '../apis/product'
+import { apiGetAllProduct } from '../apis/product'
 import { formatMoney, ratingStar } from '../utils/helper'
 import CountDown from './CountDown'
 import moment from 'moment/moment'
@@ -15,7 +15,7 @@ const DealDaily = () => {
     const [exprire, setExprire] = useState(false)
 
     const fetchDailyDeal = async() => {
-        const res = await apiGetProduct({limit: 1, page: Math.round(Math.random()*5), totalRating: 5})
+        const res = await apiGetAllProduct({limit: 1, page: Math.round(Math.random()*5), totalRating: 5})
         let h = 23 - moment().hours();
         let m = 59 - moment().minute();
         let s = 60 - moment().second();

@@ -17,8 +17,8 @@ const HotCollection = () => {
                 <div className="pl-5 flex-1">
                   <h1 className="pb-2.5 text-black font-semibold uppercase">{item.title}</h1>
                   <ul className="flex flex-col gap-[5px]">
-                    {item.brand.map((el) => (
-                      <li className="flex gap-1 text-sm items-center text-[#808080] hover:text-main hover:cursor-pointer"><AiOutlineRight size={10}/> {el}</li>
+                    {item.brand.map((el, index) => (
+                      <li key={index} className="flex gap-1 text-sm items-center text-[#808080] hover:text-main hover:cursor-pointer"><AiOutlineRight size={10}/> {el}</li>
                     ))}
                   </ul>
                 </div>

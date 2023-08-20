@@ -2,6 +2,7 @@ import React from 'react'
 import icons from '../../utils/icons'
 import { Link } from 'react-router-dom'
 import paths from '../../utils/paths'
+import { Button } from '@mui/material'
 
 const Header = () => {
   const { RiPhoneFill, MdEmail, BsHandbagFill, FaUserCircle } = icons
@@ -29,7 +30,10 @@ const Header = () => {
               <BsHandbagFill color='red'/>
               <span>0 Item(s)</span>
             </div>
-            <div className='flex items-center justify-center px-4'><FaUserCircle size={24} /></div>
+            <Button color='error' className='flex items-center gap-2 hover:cursor-pointer justify-center px-4'>
+              <FaUserCircle size={24} />
+              <p>Profile</p>
+            </Button>
         </div>
     </div>
   )

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { apiGetProduct } from "../../../apis/product";
+import { apiGetAllProduct } from "../../../apis/product";
 import Item from "./Item";
 
 const FeatureProduct = () => {
   const [featureProduct, setFeatureProduct] = useState(null);
   const fetchProduct = async () => {
-    const res = await apiGetProduct({ totalRating: 4, limit: 9 });
+    const res = await apiGetAllProduct({ totalRating: 4, limit: 9 });
     setFeatureProduct(res.product);
   };
   useEffect(() => {
@@ -19,7 +19,7 @@ const FeatureProduct = () => {
       </h1>
       <div className="flex mt-5 w-full flex-wrap">
         {featureProduct?.map((item) => (
-          <Item item={item} />
+          <Item item={item} key={item._id}/>
         ))}
       </div>
     </div>

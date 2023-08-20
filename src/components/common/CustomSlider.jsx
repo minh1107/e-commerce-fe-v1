@@ -14,7 +14,7 @@ const CustomSlider = ({productsData, isNew, widthImg}) => {
     <Slider {...settings}>
       {productsData?.map((item) => (
         <Product
-          key={item.id}
+          key={item._id}
           productData={item}
           isNew={isNew}
           widthImg={widthImg}

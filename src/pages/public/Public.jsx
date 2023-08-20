@@ -9,8 +9,8 @@ const Public = () => {
         <TopHeader />
         <Header />
         <Navigation />
-        <div className='w-main'>
-        <Outlet />
+        <div className='w-full'>
+          <Outlet />
         </div>
         <Footer />
     </div>

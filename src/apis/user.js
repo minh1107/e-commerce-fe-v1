@@ -15,9 +15,24 @@ export const apiLogin = (data) =>
     data,
   });
 
-export const apiResetpassword = (data) => 
+export const apiForgotpassword = (data) => 
     instance({
         url: "/user/forgotpassword",
         method: 'post',
         data
-    })
+  })
+
+export const apiResetpassword = (data) => {
+  return instance({
+    url: "/user/resetpassword",
+    method: 'post',
+    data
+  })
+} 
+  
+export const apiCurrent = () => {
+  return instance({
+    url: "/user/current",
+    method: 'get'
+  })
+}

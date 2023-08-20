@@ -7,6 +7,13 @@ const instance = axios.create({
 // Add a request interceptor
 instance.interceptors.request.use(function (config) {
     // Do something before request is sent
+      const storageData = localStorage.getItem("persist:shop/user");
+      const jsonAccessToken = JSON.parse(storageData).token
+      const accessToken = jsonAccessToken.slice(1, jsonAccessToken.length - 1)
+      if (accessToken) {
+        config.headers["Authorization"] = `Bearer ${accessToken}`;
+      }
+      console.log(`Bearer ${accessToken}`)      
     return config;
   }, function (error) {
     // Do something with request error
@@ -21,7 +28,7 @@ instance.interceptors.response.use(function (response) {
   }, function (error) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
-    return error.data;
+    return error.response.data;
 });
 
 export default instance

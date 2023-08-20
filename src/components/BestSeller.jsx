@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { apiGetProduct } from '../apis/product'
+import { apiGetAllProduct } from '../apis/product'
 import CustomSlider from './common/CustomSlider'
 import { useDispatch, useSelector } from 'react-redux'
 import { getBestSellerProducts, getNewProducts } from '../stores/product/asyncAction'
@@ -21,7 +21,7 @@ const BestSeller = () => {
         dispatch(getBestSellerProducts({limit: 10}))
     }, [])
     const fetchProduct = async () => {
-      const res = await Promise.all([apiGetProduct({sort: '-sold'}), apiGetProduct({sort: '-createAt'})])
+      const res = await Promise.all([apiGetAllProduct({sort: '-sold'}), apiGetAllProduct({sort: '-createAt'})])
       if(res[0]?.status == true) {
         setBestSllers(res[0].product)
       }

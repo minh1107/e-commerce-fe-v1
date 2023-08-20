@@ -22,7 +22,6 @@ button.slick-next::before {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
 }
 
 button.slick-prev::before {

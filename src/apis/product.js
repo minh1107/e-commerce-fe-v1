@@ -1,7 +1,12 @@
 import instance from "../axios";
 
-export const apiGetProduct = sort => instance({
+export const apiGetAllProduct = sort => instance({
     url: '/product',
     method: 'get',
     params: sort
+})
+
+export const apiGetProduct = (id) => instance({
+    url: `/product/${id}`,
+    method: 'get',
 })

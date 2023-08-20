@@ -20,7 +20,7 @@ const Home = () => {
   const { newArrival } = useSelector((state) => state.productReducer);
 
   return (
-    <>
+    <div className="flex items-center justify-center flex-col">
       <div className="w-main flex gap-5">
         <div className="flex flex-col gap-5 w-[25%] flex-auto">
           <Sidebar />
@@ -31,36 +31,34 @@ const Home = () => {
           <BestSeller />
         </div>
       </div>
-      <div className="flex gap-5 flex-col">
+      <div className="flex w-main gap-5 flex-col">
         <FeatureProduct />
         <ImageShow />
       </div>
-      <div>
-        <div>
-          <h1 className="font-bold mb-5 text-xl py-4 border-b-4 w-full border-b-main">
-            NEW ARRIVALS
-          </h1>
-          <CustomSlider productsData={newArrival} widthImg={"w-[345px]"} />
-        </div>
-        <div>
-          <h1 className="font-bold mb-5 text-xl uppercase py-4 border-b-4 border-b-main">
-            Hot Collection
-          </h1>
-          <HotCollection />
-        </div>
-        <div>
-          <h1 className="font-bold mb-5 text-xl uppercase py-4 border-b-4 border-b-main">
-            BLOG POSTS
-          </h1>
-        </div>
+      <div className="w-main">
+        <h1 className="font-bold mb-5 text-xl py-4 border-b-4 w-full border-b-main">
+          NEW ARRIVALS
+        </h1>
+        <CustomSlider productsData={newArrival} widthImg={"w-[345px]"} />
       </div>
-      <div>
+      <div className="w-main">
+        <h1 className="font-bold w-main mb-5 text-xl uppercase py-4 border-b-4 border-b-main">
+          Hot Collection
+        </h1>
+        <HotCollection />
+      </div>
+      <div className="w-main">
+        <h1 className="font-bold mb-5 text-xl uppercase py-4 border-b-4 border-b-main">
+          BLOG POSTS
+        </h1>
+      </div>
+      <div className="w-main">
         <h1 className="font-bold mb-5 text-xl uppercase py-4 border-b-4 border-b-main">
           BLOG POSTS
         </h1>
       </div>
       <div className="w-full h-[500px]"></div>
-    </>
+    </div>
   );
 };
 
