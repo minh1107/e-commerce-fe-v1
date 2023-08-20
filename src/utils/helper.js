@@ -6,7 +6,7 @@ export const createSlug = string => string.toLowerCase().normalize('NFD').replac
 
 export const formatMoney = number => {
     if (typeof Intl === "undefined" || !Intl.NumberFormat) {
-        console.log("This browser doesn't support Intl.NumberFormat");
+        alert("This browser doesn't support Intl.NumberFormat");
     } else {
         const nFormat = new Intl.NumberFormat();
         return nFormat.format(number);

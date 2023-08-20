@@ -20,7 +20,6 @@ const BestSeller = () => {
         dispatch(getNewProducts({limit: 8}))
         dispatch(getBestSellerProducts({limit: 10}))
     }, [])
-    console.log(newArrival, bestSeller)
     const fetchProduct = async () => {
       const res = await Promise.all([apiGetProduct({sort: '-sold'}), apiGetProduct({sort: '-createAt'})])
       if(res[0]?.status == true) {
@@ -53,13 +52,6 @@ const BestSeller = () => {
             </div>
             <div className='mt-4 mb-[15px]'>
                 <CustomSlider productsData={productShowed} isNew={activeTab === 1 ? true : false} widthImg={'w-[243px]'}/>
-                {/* <Slider {...settings}>
-                    {
-                        productShowed?.map(item => (
-                            <Product key={item.id} productData={item} isNew={activeTab === 1 ? true : false}/>
-                        ))
-                    }
-                </Slider> */}
             </div>
             <div className='w-full flex gap-4 hover:cursor-pointer'>
                     <img src="https://digital-world-2.myshopify.com/cdn/shop/files/banner1-home2_2000x_crop_center.png?v=1613166657" alt="banner" className='flex-1 object-contain' />

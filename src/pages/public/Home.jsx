@@ -37,17 +37,27 @@ const Home = () => {
       </div>
       <div>
         <div>
-          <h1 className="font-bold text-xl py-4 border-b-4 w-full border-b-main">
+          <h1 className="font-bold mb-5 text-xl py-4 border-b-4 w-full border-b-main">
             NEW ARRIVALS
           </h1>
           <CustomSlider productsData={newArrival} widthImg={"w-[345px]"} />
         </div>
         <div>
-          <h1 className="font-bold text-xl uppercase py-4 border-b-4 border-b-main">
+          <h1 className="font-bold mb-5 text-xl uppercase py-4 border-b-4 border-b-main">
             Hot Collection
           </h1>
           <HotCollection />
         </div>
+        <div>
+          <h1 className="font-bold mb-5 text-xl uppercase py-4 border-b-4 border-b-main">
+            BLOG POSTS
+          </h1>
+        </div>
+      </div>
+      <div>
+        <h1 className="font-bold mb-5 text-xl uppercase py-4 border-b-4 border-b-main">
+          BLOG POSTS
+        </h1>
       </div>
       <div className="w-full h-[500px]"></div>
     </>

@@ -27,7 +27,6 @@ const Banner = () => {
 
     }, [count])
 
-    console.log(count)
     const handlePlusSlide = () => {
         if(count == 2) setCount(0) 
         else setCount(pre => pre+1)

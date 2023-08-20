@@ -1,7 +1,7 @@
 import React from 'react'
-import icons from '../utils/icons'
+import icons from '../../utils/icons'
 import { Link } from 'react-router-dom'
-import paths from '../utils/paths'
+import paths from '../../utils/paths'
 
 const Header = () => {
   const { RiPhoneFill, MdEmail, BsHandbagFill, FaUserCircle } = icons

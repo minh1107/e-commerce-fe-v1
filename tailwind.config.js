@@ -12,7 +12,7 @@ module.exports = {
         main: '#ee3131'
       },
       width: {
-        main: '1400px'
+        main: '1180px'
       },
       fontFamily: {
         poppin: ['Poppins', 'sans-serif']
