@@ -5,6 +5,6 @@ export {default as Sidebar} from "./Sidebar";
 export {default as BestSeller} from "./BestSeller";
 export {default as Product} from "./Product";
 export {default as SelectOption} from "./common/SelectOption";
-export {default as CountDown} from './CountDown'
+export {default as CountDown} from './common/CountDown'
 export {default as Footer} from './Footer/Footer'   
 export {default as BreadCrumb} from './BreadCrumb/BreadCrumb'   

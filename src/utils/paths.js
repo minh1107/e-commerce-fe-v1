@@ -3,7 +3,7 @@ const paths = {
     HOME: '',
     ALL: '*',
     LOGIN: 'login',
-    PRODUCTS: 'product',
+    PRODUCTS: ':category',
     BLOGS: 'blogs',
     OUR_SERVICES: 'services',
     FAQ: 'faqs',

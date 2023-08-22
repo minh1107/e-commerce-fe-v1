@@ -10,3 +10,9 @@ export const apiGetProduct = (id) => instance({
     url: `/product/${id}`,
     method: 'get',
 })
+
+export const apiRatings = (data) => instance({
+    url: `/product/ratings`,
+    method: 'put',
+    data
+})

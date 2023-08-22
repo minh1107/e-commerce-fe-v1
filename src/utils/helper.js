@@ -19,3 +19,9 @@ export const ratingStar = (number, size) => {
     for (let index = 5; index > number; index--) {star.push(<BsStar size={size} key={index} color="orange"/>)}
     return star
 }
+
+export const formatPrice = (price, type, round) => {
+    if(!round) round = 4 
+    price = Math.round(price / Math.pow(10, round))*Math.pow(10, round)
+    return price.toLocaleString('it-IT', {style : 'currency', currency : type});
+}

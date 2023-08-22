@@ -13,7 +13,7 @@ const Sidebar = () => {
       {
         productCategory?.data?.map(el => (
           <NavLink key={createSlug(el.title)} 
-          to={`/${paths.PRODUCTS}/${createSlug(el.title)}`}
+          to={`/${el.title.toLowerCase()}`}
           className={({isActive}) => isActive ? 'text-main bg-main pt-[14px] pb-[15px] px-5 text-sm' : 'pt-[14px] hover:text-main pb-[15px] px-5 text-sm'}>
             {el.title}
           </NavLink>

@@ -13,7 +13,6 @@ instance.interceptors.request.use(function (config) {
       if (accessToken) {
         config.headers["Authorization"] = `Bearer ${accessToken}`;
       }
-      console.log(`Bearer ${accessToken}`)      
     return config;
   }, function (error) {
     // Do something with request error
