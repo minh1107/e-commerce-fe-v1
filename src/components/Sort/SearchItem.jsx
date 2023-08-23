@@ -6,7 +6,7 @@ import { apiGetAllProduct } from '../../apis'
 import { formatPrice } from '../../utils/helper'
 import useDebounce from '../hook/useDebounce'
 
-const colors = ['gray', 'blue', 'green', 'yellow', 'black', 'white']
+const colors = ['gray', 'blue', 'green', 'yellow', 'black', 'white', 'red']
 const { AiOutlineCaretDown } = icons
 const SearchItem = ({name, activeClick, changeActiveFilter, type='checkbox'}) => {
     const navigate = useNavigate()

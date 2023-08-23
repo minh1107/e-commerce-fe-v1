@@ -16,7 +16,7 @@ function App() {
   }, [dispatch])
   
   return (
-    <div className="flex font-poppin overflow-y-auto min-h-screen">
+    <div className="flex font-poppin overflow-y-auto min-h-screen relative">
       {isShowModal && <Modal>{modalChildren}</Modal>}
     <Routes>
         <Route path={paths.PUBLIC} element={<Public />}>

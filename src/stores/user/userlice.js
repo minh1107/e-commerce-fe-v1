@@ -29,6 +29,8 @@ export const userSlice = createSlice({
         })
         builder.addCase(getCurrentUser.rejected, (state, action) => {
             state.isLoading = false;
+            state.isLoggedIn = false;
+            state.token = null
             state.errorMessage = action.payload?.message
         })
     }

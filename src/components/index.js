@@ -1,9 +1,9 @@
 export {default as Header} from "./Header/Header";
-export {default as Banner} from "./Banner";
-export {default as Navigation} from "./Navigation";
-export {default as Sidebar} from "./Sidebar";
-export {default as BestSeller} from "./BestSeller";
-export {default as Product} from "./Product";
+export {default as Banner} from "./Home/Banner";
+export {default as Navigation} from "./Home/Navigation";
+export {default as Sidebar} from "./Home/Sidebar";
+export {default as BestSeller} from "./Home/BestSeller/BestSeller";
+export {default as Product} from "./common/Product";
 export {default as SelectOption} from "./common/SelectOption";
 export {default as CountDown} from './common/CountDown'
 export {default as Footer} from './Footer/Footer'   

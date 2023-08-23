@@ -9,3 +9,4 @@ export const getCurrentUser = createAsyncThunk('user/current', async(data, {reje
         return rejectWithValue(error.response.data); // Pass the error response data
     }
 })  
+

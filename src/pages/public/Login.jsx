@@ -1,12 +1,12 @@
 import { Box, Button,  Input,  Modal,  TextField } from "@mui/material";
 import React, { useCallback, useEffect, useState } from "react";
-import background from '../../assets/image/loginBackground.webp'
-import { apiLogin, apiRegister, apiForgotpassword } from "../../apis/user";
+import background from 'assets/image/loginBackground.webp'
+import { apiLogin, apiRegister, apiForgotpassword } from "apis/user";
 import Swal from "sweetalert2";
-import paths from "../../utils/paths";
+import paths from "utils/paths";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
-import { login, register } from "../../stores/user/userlice";
+import { login } from "stores/user/userlice";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -17,9 +17,9 @@ const Login = () => {
   useEffect(() => {
     if(location?.state == null) {
       
-    } else if(location?.state == 'true') {
+    } else if(location?.state === 'true') {
       Swal.fire('Đăng ký thành công', location?.state, 'success')
-    } else if(location?.state == 'false') {
+    } else if(location?.state === 'false') {
       Swal.fire('Đăng nhập thất bại', location?.state, 'error')
     }
   }, [])

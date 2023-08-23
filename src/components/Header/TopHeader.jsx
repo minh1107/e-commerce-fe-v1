@@ -12,10 +12,15 @@ const TopHeader = () => {
   const { isLoggedIn, currentUser } = useSelector(state => state.userReducer)
   const dispatch = useDispatch()
   useEffect(() => {
-    if(isLoggedIn) {
-      dispatch(getCurrentUser())
-    }
-  }, [])
+       const idSettimeout = setTimeout(() => {
+        if(isLoggedIn) {
+          dispatch(getCurrentUser())
+        }
+      }, 300);
+      return () => {
+        clearTimeout(idSettimeout)
+      }
+  }, [isLoggedIn])
 
   return (
     <div className='h-10 w-full flex bg-main'>
@@ -24,7 +29,7 @@ const TopHeader = () => {
                 <p>ORDER ONLINE OR CALL US (+1800) 000 8808</p>
             </div>
             <div>
-                {isLoggedIn ?
+                {(isLoggedIn && currentUser) ?
                  <div className='flex gap-2 items-center'>
                   <span>Well come {currentUser?.data.lastname} {currentUser?.data.firstname}</span> 
                   <span onClick={() => dispatch(logout())} className='hover:bg-white transition duration-500 ease-in-out hover:cursor-pointer rounded-full p-2'><MdLogout className='hover:text-black' size={20}/></span>

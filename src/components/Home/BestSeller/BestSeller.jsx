@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react'
-import { apiGetAllProduct } from '../apis/product'
-import CustomSlider from './common/CustomSlider'
+import { apiGetAllProduct } from '../../../apis/product'
+import CustomSlider from '../../common/CustomSlider'
 import { useDispatch, useSelector } from 'react-redux'
-import { getBestSellerProducts, getNewProducts } from '../stores/product/asyncAction'
+import { getBestSellerProducts, getNewProducts } from '../../../stores/product/asyncAction'
 
 const tabs = [
     {id: 1, name: 'Best seller'},

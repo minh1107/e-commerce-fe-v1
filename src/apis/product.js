@@ -16,3 +16,9 @@ export const apiRatings = (data) => instance({
     method: 'put',
     data
 })
+
+export const apiRatingProduct = (data) => instance({
+    url: '/product/ratings',
+    method: 'put',
+    data
+})

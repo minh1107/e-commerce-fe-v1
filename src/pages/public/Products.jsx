@@ -6,7 +6,7 @@ import Masonry from 'react-masonry-css';
 import SearchItem from '../../components/Sort/SearchItem';
 import InputSelect from '../../components/Sort/InputSelect';
 import { sortsOption } from '../../utils/resource';
-
+import PaginationCustom from '../../components/Pagination/Pagination';
 
 const breakpointColumnsObj = {
   default: 4,
@@ -17,14 +17,23 @@ const breakpointColumnsObj = {
 const Products = () => {
   const { category } = useParams()
   const [product, setProduct] = useState()
+  const [totalProducts, setTotalProducts] = useState()
+  const [page, setPage] = useState(1)
   const [activeClick, setactiveClick] = useState(null)
   const [params] = useSearchParams()
   const [sort, setSort] = useState()
   const navigate = useNavigate()
-
   const fetchProductByCategory = async(queries) => {
-    const response = await apiGetAllProduct(queries)
-    setProduct(response.product)
+    let response = []
+    if(category == ':category' || category == 'product') {
+      response = await apiGetAllProduct({...queries, limit: process.env.REACT_APP_LIMIT_RECORD || 16})
+    } else {
+      response = await apiGetAllProduct({...queries, limit: process.env.REACT_APP_LIMIT_RECORD || 16, category})
+    }
+    if(response?.status) {
+      setProduct(response.product)
+      setTotalProducts(response?.totalProducts)
+    }
   }
   // Tạo query rồi gọi api
   useEffect(() => {
@@ -63,16 +72,21 @@ const Products = () => {
   const changeValue = useCallback(
     (value) => {
       setSort(value)
-    }
-    ,
-    [sort],
-  )
-  useEffect(() => {
+    },
+    [sort])
+
+  const handleChangeIndex = (e, page) => {
+    setPage(page)
+  }
+
+    useEffect(() => {
       navigate({
-        pathname: `/${category}`,
-        search: createSearchParams({sort}).toString()
-    })
-  }, [sort])
+          pathname: `/${category}`,
+          search: createSearchParams({sort}).toString() + "&" + createSearchParams({page}).toString()
+      })
+  }, [sort, page])
+
+
   
   return (
     <div className='flex flex-col'>
@@ -104,14 +118,15 @@ const Products = () => {
               {
                 product?.map((el, index) => (
                   <Product key={el._id}
-                          productData={el}
+                          productData={el} 
                   />
                 ))
               }
           </Masonry>
         </div>
       </div>
-      <div className='h-[500px]'>
+      <div className='mx-auto w-main flex justify-end mb-10'>
+          <PaginationCustom pageNumbers={totalProducts} onclick={handleChangeIndex}/>
       </div>
     </div>
   )

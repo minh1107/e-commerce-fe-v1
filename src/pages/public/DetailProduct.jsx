@@ -27,7 +27,6 @@ const DetailProduct = () => {
       const response = await apiGetProduct(pid)
       if(response.status) setProduct(response.product)
     }
-
     const fetchInterestedProduct = async() => {
       const response = await apiGetAllProduct(product?.category.toLowercase)
       if(response?.status) setInterestedProduct(response?.product)
@@ -38,13 +37,11 @@ const DetailProduct = () => {
         setQuantityNumber(pre => pre - 1)
       }
     }
-
     const handleIncreaseQuantity = () => {
       if(quantityNumber < product.quantity) {
         setQuantityNumber(pre => pre + 1)
       }
     }
-
     const handleChangeQuantity = (e) => {
       let inputValue = parseInt(e.target.value);
       if (!isNaN(inputValue) && inputValue >= 0 && inputValue <= product.quantity) {
@@ -61,7 +58,6 @@ const DetailProduct = () => {
         window.scroll(0,0)
       }
     }, [pid])
-
     settings = {
       dots: false,
       infinite: true,
@@ -72,7 +68,6 @@ const DetailProduct = () => {
     
   return (
     <div className='w-full flex flex-col'>
-      {console.log('hello3')}
       <div className='h-20 flex justify-center items-center flex-col bg-[#f7f7f7] w-full'>
         <h3 className='w-main'>{title}</h3>
         <BreadCrumb title={title} category={category}/>
@@ -152,7 +147,7 @@ const DetailProduct = () => {
         </ul>
       </div>
       <div className='w-main m-auto mt-5'>
-        <ProductInfomation totalRating={product?.totalRating} totalCount={18}/>
+        <ProductInfomation pid={pid}/>
       </div>
       <div className='w-main m-auto mb-28'>
         <h1 className="font-bold mb-5 text-xl py-4 border-b-4 w-full border-b-main">

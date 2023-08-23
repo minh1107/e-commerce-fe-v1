@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Banner, BestSeller, Sidebar } from "../../components";
-import DealDaily from "../../components/DealDaily";
+import DealDaily from "../../components/Home/DealDaily";
 import FeatureProduct from "../../components/Home/FeatureProduct/FeatureProduct";
 import { ImageShow } from "../../components/ImageShow/ImageShow";
 import CustomSlider from "../../components/common/CustomSlider";

@@ -1,8 +1,8 @@
 import React, { memo, useEffect, useState } from 'react'
-import icons from '../utils/icons'
-import { apiGetAllProduct } from '../apis/product'
-import { formatMoney, ratingStar } from '../utils/helper'
-import CountDown from './common/CountDown'
+import icons from '../../utils/icons'
+import { apiGetAllProduct } from '../../apis/product'
+import { formatMoney, ratingStar } from '../../utils/helper'
+import CountDown from '../common/CountDown'
 import moment from 'moment/moment'
 
 let idInterval

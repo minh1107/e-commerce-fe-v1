@@ -1,21 +1,19 @@
 import React, {useState} from "react";
-import { formatMoney, ratingStar } from "../utils/helper";
-import img from '../assets/image/label.png'
-import imgBlue from '../assets/image/labelBlue.png'
-import SelectOption from "./common/SelectOption";
-import icons from "../utils/icons";
+import { formatMoney, ratingStar } from "../../utils/helper";
+import img from '../../assets/image/label.png'
+import SelectOption from "./SelectOption";
+import icons from "../../utils/icons";
 import { Link } from "react-router-dom";
-import paths from "../utils/paths";
 
 const { AiTwotoneHeart,MdMenu,FaEye } = icons
-const Product = ({ productData, isNew, widthImg }) => {
+const Product = ({ productData, isNew, widthImg, isSale }) => {
     const [showOption, setShowOption] = useState(false)
     const [isDragging, setIsDragging] = useState(false); // Thêm trạng thái isDragging
   
     return (
     <div className="w-full px-[10px] text-base">
          <Link
-        className="border p-[15px] flex flex-col items-center hover:cursor-pointer"
+        className="border flex flex-col items-center hover:cursor-pointer"
         onMouseEnter={() => setShowOption(true)}
         onMouseLeave={() => setShowOption(false)}
         onMouseDown={() => setIsDragging(true)} // Khi bắt đầu kéo chuột
@@ -38,9 +36,9 @@ const Product = ({ productData, isNew, widthImg }) => {
             src={productData?.thumb}
             className={`${widthImg} -z-10 object-contain`}
             />
-            <img src={img} alt="" className="absolute w-20 object-contain top-0 right-0"/>
-            <span className={`absolute w-20 top-[5px] ${isNew ? 'right-[-20px]' : 'right-[-5px]'} text-white font-medium`}>
-                {isNew ? 'New' : 'Trending'}</span>
+            {isSale && <img src={img} alt="" className="absolute w-20 object-contain top-[0px] -right-6"/>}
+            <span className={`absolute w-20 top-[5px] ${isNew ? 'right-[-40px]' : 'right-[-26px]'} text-white font-medium`}>
+                {isSale ? isNew ? 'New' : 'Trending' : ''}</span>
            {showOption && <div className="absolute bottom-0 flex left-1/2 gap-2 animate-slideTop">
                 <SelectOption icon={AiTwotoneHeart}/>
                 <SelectOption icon={MdMenu}/>

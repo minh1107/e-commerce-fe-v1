@@ -1,6 +1,6 @@
 import Slider from 'react-slick'
 import React from "react";
-import Product from '../Product';
+import Product from './Product';
 
 const settings = {
     dots: false,
@@ -14,6 +14,7 @@ const CustomSlider = ({productsData, isNew, widthImg}) => {
     <Slider {...settings}>
       {productsData?.map((item) => (
         <Product
+          isSale={true}
           key={item._id}
           productData={item}
           isNew={isNew}

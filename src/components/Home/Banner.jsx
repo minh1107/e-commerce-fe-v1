@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import slide1 from '../assets/image/slide1.png'
-import slide2 from '../assets/image/slide2.png'
-import slide3 from '../assets/image/slide3.png'
+import slide1 from '../../assets/image/slide1.png'
+import slide2 from '../../assets/image/slide2.png'
+import slide3 from '../../assets/image/slide3.png'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
