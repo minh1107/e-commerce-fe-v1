@@ -4,7 +4,7 @@ import { createSearchParams, useNavigate, useParams, useSearchParams } from 'rea
 import paths from '../../utils/paths'
 import { apiGetAllProduct } from '../../apis'
 import { formatPrice } from '../../utils/helper'
-import useDebounce from '../hook/useDebounce'
+import useDebounce from 'components/hook/useDebounce'
 
 const colors = ['gray', 'blue', 'green', 'yellow', 'black', 'white', 'red']
 const { AiOutlineCaretDown } = icons

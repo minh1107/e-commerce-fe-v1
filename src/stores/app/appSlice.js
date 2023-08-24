@@ -7,12 +7,14 @@ export const appSlice = createSlice({
         productCategory: [],
         isLoading: false,
         isShowModal: false,
-        modalChildren: null
+        modalChildren: null,
+        isUpdated: false
     },
     reducers: {
         showModal: (state, action) => {
             state.isShowModal =  action.payload.isShowModal
             state.modalChildren = action.payload.modalChildren
+            state.isUpdated = action.payload.isUpdated
         }
     },
     extraReducers: (builder) => {

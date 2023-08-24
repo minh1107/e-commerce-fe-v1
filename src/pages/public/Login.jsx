@@ -7,6 +7,8 @@ import paths from "utils/paths";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { login } from "stores/user/userlice";
+import { showModal } from "stores/app/appSlice";
+import Loading from "components/Loading/Loading";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -38,8 +40,9 @@ const Login = () => {
       e.preventDefault();
       const {firstname, lastname, mobile, ...data} = payload
       if(isRegister) {
+            dispatch(showModal({isShowModal: true, modalChildren: <Loading />}))
             const response = await apiRegister(payload)
-            console.log(response)
+            dispatch(showModal({isShowModal: false, modalChildren: null}))
             Swal.fire(response.status ? 'Đăng kí thành công' : 'Đăng kí không thành công', response?.message, response?.status ? 'success' : 'error').then(() => {
             resetPayload()
             if(response?.status) setIsRegister(false)

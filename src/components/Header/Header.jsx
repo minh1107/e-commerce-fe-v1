@@ -3,9 +3,12 @@ import icons from '../../utils/icons'
 import { Link } from 'react-router-dom'
 import paths from '../../utils/paths'
 import { Button } from '@mui/material'
+import { useSelector } from 'react-redux'
 
 const Header = () => {
   const { RiPhoneFill, MdEmail, BsHandbagFill, FaUserCircle } = icons
+  const {currentUser} = useSelector(state => state.userReducer)
+  console.log(currentUser)
   return (
     <div className='flex justify-between w-main h-[110px] items-center'>
         <Link to={paths.HOME}>
@@ -30,10 +33,15 @@ const Header = () => {
               <BsHandbagFill color='red'/>
               <span>0 Item(s)</span>
             </div>
-            <Button color='error' className='flex items-center gap-2 hover:cursor-pointer justify-center px-4'>
-              <FaUserCircle size={24} />
-              <p>Profile</p>
-            </Button>
+            {
+              currentUser ? 
+              <Link to={+currentUser?.data.role == 0 ? `/${paths.MEMBER}/${paths.MEMBER}` : `/${paths.ADMIN}/${paths.DASHBOARD}`}>
+                <Button color='error' className='flex items-center gap-2 hover:cursor-pointer justify-center px-4'>
+                  <FaUserCircle size={24} />
+                  <p>Profile</p>
+                </Button>
+              </Link> : <></>
+            }
         </div>
     </div>
   )

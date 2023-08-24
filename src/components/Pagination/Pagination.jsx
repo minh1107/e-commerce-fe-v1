@@ -1,16 +1,11 @@
-import { useState,useEffect } from 'react';
+import { useState,useEffect, memo, useLayoutEffect } from 'react';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 
-function PaginationCustom({onclick, pageNumbers}) {
-    const [countNumber, setCountNumber] = useState(1)
-    useEffect(() => {
-        setCountNumber(Math.ceil(pageNumbers/process.env.REACT_APP_LIMIT_RECORD || 1))
-    }, [])
-    console.log(countNumber)
+function PaginationCustom({onclick, recordsNumber, recordPerPage}) {
   return (
     <Stack spacing={2}>
-        {pageNumbers >= 16 && <Pagination onChange={onclick} count={countNumber} />}
+        {recordsNumber >= recordPerPage && <Pagination onChange={onclick} count={Math.ceil(recordsNumber/recordPerPage)} />}
     </Stack> 
   );
 }

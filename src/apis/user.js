@@ -36,3 +36,27 @@ export const apiCurrent = () => {
     method: 'get'
   })
 }
+
+export const apiGetAllUser = (data) => {
+  return instance({
+    url: '/user/alluser',
+    method: 'get',
+    params: data
+  })
+}
+
+export const apiUpdateUserByAdmin = (data, id) => {
+  return instance({
+    url: `/user/updatebyadmin/${id}`,
+    method: 'put',
+    data: data
+  })
+}
+
+export const apiDeleteUserByAdmin = (data) => (
+  instance({
+    url: `/user`,
+    method: 'delete',
+    params: data
+  })
+)
