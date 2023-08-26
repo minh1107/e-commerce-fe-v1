@@ -1,6 +1,6 @@
 import {RiPhoneFill} from 'react-icons/ri'
 import { MdEmail, MdMenu, MdLogout, MdSpaceDashboard } from 'react-icons/md'
-import { BsSquareFill, BsHandbagFill,BsFillTelephoneFill, BsStarHalf, BsStarFill, BsStar, BsFillCartCheckFill} from 'react-icons/bs'
+import { BsSquareFill, BsCloudUploadFill, BsHandbagFill,BsFillTelephoneFill, BsStarHalf, BsStarFill, BsStar, BsFillCartCheckFill} from 'react-icons/bs'
 import { FaUserCircle,FaMapMarkerAlt, FaEye, FaShippingFast, FaProductHunt } from 'react-icons/fa'
 import {AiTwotoneHeart,AiFillCaretLeft, AiOutlineCaretRight, AiOutlineRight, AiOutlineFileProtect, AiFillGift, AiOutlineCaretDown} from 'react-icons/ai'
 import {GrMail} from 'react-icons/gr'
@@ -48,6 +48,7 @@ const icons = {
     AiFillCaretLeft,
 
     // logout
+    BsCloudUploadFill
 }
 
 export default icons

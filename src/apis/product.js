@@ -22,3 +22,9 @@ export const apiRatingProduct = (data) => instance({
     method: 'put',
     data
 })
+
+export const apiCreateProduct = (data) => instance({
+    url: '/product',
+    method: 'post',
+    data
+})

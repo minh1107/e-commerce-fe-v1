@@ -4,7 +4,7 @@ import { apiGetAllProduct, apiGetProduct } from '../../apis'
 import { BreadCrumb } from '../../components'
 import Slider from 'react-slick'
 import ReactImageMagnify from 'react-image-magnify';
-import { formatPrice, ratingStar } from '../../utils/helper'
+import { HtmlStringToReact, formatPrice, ratingStar } from '../../utils/helper'
 import icons from '../../utils/icons'
 import BoxButton from '../../components/common/BoxButton'
 import { Box, Button } from '@mui/material'
@@ -114,9 +114,9 @@ const DetailProduct = () => {
                     <p className='mt-[1px]'>{product?.totalRating} reviews</p>
                 </div>
                 <ul className='text-[14px]'>
-                  {product?.description?.map(item => (
+                  {product?.description.length > 1 ? product?.description?.map(item => (
                     <li key={item} className='flex items-center mb-[5px] h-5 gap-2 text-[#505050]'><BsSquareFill size={4}/> {item}</li>
-                  ))}
+                  )) : HtmlStringToReact(product?.description)}
                 </ul>
                 <Box className="flex flex-col gap-2.5 mb-2.5">
                   <BoxButton title={'Internal'} text={'32GB'}/>
