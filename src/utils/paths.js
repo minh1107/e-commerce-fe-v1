@@ -21,6 +21,9 @@ const paths = {
     // member
     MEMBER: 'member',
     PERSONAL: 'personal',
+    CART: 'cart',
+    SHOPPING_HISTORY: 'shoppinghistory',
+    WISHLIST: 'wishlist',
 
     ALL: '*'
 }

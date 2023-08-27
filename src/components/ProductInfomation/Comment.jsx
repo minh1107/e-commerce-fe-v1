@@ -4,7 +4,7 @@ import moment from 'moment'
 import { ratingStar } from '../../utils/helper'
 
 
-const Comment = ({avatar, name, comment, star, updatedAt}) => {
+const Comment = ({avatar, firstname, lastname , comment, star, updatedAt}) => {
     console.log(updatedAt, '2121')
   return (
     <div className='flex p-4 border rounded-md shadow-md mt-4 mr-4 '>
@@ -13,7 +13,7 @@ const Comment = ({avatar, name, comment, star, updatedAt}) => {
         </div>
         <div className='flex flex-col gap-2 flex-auto'>
             <div className='flex items-center justify-between'>
-                <h3 className='capitalize font-bold text-base'>{name}</h3>
+                <h3 className='capitalize font-bold text-base'>{(firstname || lastname) ?  firstname + " " + lastname : 'User deleted'}</h3>
                 <span className='capitalize font-bold mr-10'>{moment(updatedAt).fromNow()}</span>
             </div>
             <div className=''>

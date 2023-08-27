@@ -18,7 +18,6 @@ const Login = () => {
   const location = useLocation()
   useEffect(() => {
     if(location?.state == null) {
-      
     } else if(location?.state === 'true') {
       Swal.fire('Đăng ký thành công', location?.state, 'success')
     } else if(location?.state === 'false') {

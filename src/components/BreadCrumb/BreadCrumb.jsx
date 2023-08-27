@@ -13,7 +13,7 @@ const BreadCrumb = ({ title, category }) => {
   const breadCrumb = useBreadcrumbs(routes);
 
   return (
-    <div className="text-sm flex w-main gap-1">
+    <div className="text-sm flex xl:w-main md:w-tablet gap-1">
       {breadCrumb
         .filter((item) => item.match.route?.path == item.match.pattern.path)
         .map(({ match }, index, self) => (

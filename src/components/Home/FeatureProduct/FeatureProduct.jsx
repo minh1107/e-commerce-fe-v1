@@ -5,7 +5,7 @@ import Item from "./Item";
 const FeatureProduct = () => {
   const [featureProduct, setFeatureProduct] = useState(null);
   const fetchProduct = async () => {
-    const res = await apiGetAllProduct({ totalRating: 4, limit: 9 });
+    const res = await apiGetAllProduct({ limit: 9, sort: '-totalRating' });
     setFeatureProduct(res.product);
   };
   useEffect(() => {

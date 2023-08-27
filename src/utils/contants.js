@@ -6,7 +6,7 @@ const {
   BiSolidUserPin,
   FaProductHunt,
   IoCreate,
-  BsFillCartCheckFill,
+  BsFillCartCheckFill, MdFavorite, GrPersonalComputer, FaHistory
 } = icons;
 
 export const navigation = [
@@ -69,3 +69,33 @@ export const pathAdmin = [
     icon: BsFillCartCheckFill
   },
 ];
+
+
+
+export const pathProfile = [
+  {
+    id: 1,
+    value: "Personal",
+    path: `/${paths.MEMBER}/${paths.PERSONAL}`,
+    icon: GrPersonalComputer 
+  },
+  {
+    id: 1,
+    value: "My Cart",
+    path: `/${paths.MEMBER}/${paths.CART}`,
+    icon: BsFillCartCheckFill 
+  },
+  {
+    id: 1,
+    value: "Shopping history",
+    path: `/${paths.MEMBER}/${paths.SHOPPING_HISTORY}`,
+    icon: FaHistory 
+  },
+  {
+    id: 1,
+    value: "Wishlist",
+    path: `/${paths.MEMBER}/${paths.WISHLIST}`,
+    icon: MdFavorite 
+  },
+];
+

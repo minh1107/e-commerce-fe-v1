@@ -9,12 +9,12 @@ const settings = {
     slidesToShow: 3,
     slidesToScroll: 1,
   };
-const CustomSlider = ({productsData, isNew, widthImg}) => {
+const CustomSlider = ({productsData, isNew, isSale, widthImg}) => {
   return (
     <Slider {...settings}>
       {productsData?.map((item) => (
         <Product
-          isSale={true}
+          isSale={isSale}
           key={item._id}
           productData={item}
           isNew={isNew}

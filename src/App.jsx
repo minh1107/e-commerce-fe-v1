@@ -9,7 +9,10 @@ import { Home, Public, Blogs, DetailProduct, FAQ, Login, Products, Service, Fina
 import Modal from "./components/common/Modal";
 import { AdminLayout, CreateProduct, Dashboard, ManagerProduct, ManagerUser } from "pages/admin";
 import ManagerOrder from "pages/admin/ManagerOrder";
-import { MemberLayout, Personal } from "pages/private";
+import { MemberLayout, Personal } from "pages/member";
+import Cart from "pages/member/Cart";
+import ShoppingHistory from "pages/member/ShoppingHistory";
+import Favorite from "pages/member/Favorite";
 
 function App() {
   const dispatch = useDispatch()
@@ -40,6 +43,9 @@ function App() {
         </Route>
         <Route path={paths.MEMBER} element={<MemberLayout />}>
           <Route path={paths.PERSONAL} element={<Personal />}/>
+          <Route path={paths.CART} element={<Cart />}/>
+          <Route path={paths.SHOPPING_HISTORY} element={<ShoppingHistory />}/>
+          <Route path={paths.WISHLIST} element={<Favorite />}/>
         </Route>
         <Route path={paths.RESET_PASSWORD} element={<ResetPassword />}/>
         <Route path={paths.LOGIN} element={<Login />}/>

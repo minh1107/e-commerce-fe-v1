@@ -24,7 +24,7 @@ const TopHeader = () => {
 
   return (
     <div className='h-10 w-full flex bg-main'>
-        <div className='w-main m-auto h-full text-white flex text-sm items-center justify-between'>
+        <div className='xl:w-main md:w-tablet m-auto h-full text-white flex text-sm items-center justify-between'>
             <div className=''>
                 <p>ORDER ONLINE OR CALL US (+1800) 000 8808</p>
             </div>

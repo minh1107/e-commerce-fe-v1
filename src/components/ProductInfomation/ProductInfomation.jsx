@@ -20,6 +20,7 @@ const ProductInfomation = ({pid}) => {
   const [infoProduct, setInfoProduct] = useState()
   const dispatch = useDispatch()
   const { isLoggedIn }  = useSelector(state => state.userReducer)
+  console.log(report)
   const fetchProduct = async() => {
     const response = await apiGetProduct(pid)
     if(response.status) {
@@ -89,11 +90,13 @@ const ProductInfomation = ({pid}) => {
               <div>
                 {report?.map(item => (
                     <Comment key={item._id}
-                    avatar={item.avatar} 
+                    avatar={item?.votedBy?.avatar} 
                     star={item.star} 
                     updatedAt={item.updatedAt}
                     comment={item.comment}
-                    name={`${item.votedBy.lastname} ${item.votedBy.firstname}`}
+                    firstname={item?.votedBy?.firstname}
+                    lastname={item?.votedBy?.lastname}
+                    // {`${} ${item?.votedBy?.firstname}`}
                     />
                 ))}
               </div>

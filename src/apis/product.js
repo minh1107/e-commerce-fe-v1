@@ -28,3 +28,14 @@ export const apiCreateProduct = (data) => instance({
     method: 'post',
     data
 })
+
+export const apiDeleteProduct = (data) => instance({
+    url: `/product/${data}`,
+    method: 'delete'
+})
+
+export const apiUpdateProduct = ({data, id}) => instance({
+    url: `/product/${id}`,
+    method: 'put',
+    data
+})

@@ -1,7 +1,7 @@
 import React, { memo, useRef } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 
-function MarkDownEditor({label, changeValue, name , invalidField, setInvalidField}) {
+function MarkDownEditor({label, changeValue, name , invalidField, setInvalidField ,initialValue}) {
     
   return (
     <>
@@ -9,6 +9,7 @@ function MarkDownEditor({label, changeValue, name , invalidField, setInvalidFiel
       <Editor
         apiKey={process.env.REACT_APP_MCETINY}
         // "<p>This is the initial content of the editor.</p>"
+        initialValue={initialValue}
         init={{
           height: 200,
           menubar: true,

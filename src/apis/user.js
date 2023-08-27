@@ -60,3 +60,11 @@ export const apiDeleteUserByAdmin = (data) => (
     params: data
   })
 )
+
+export const apiUpdateInfoUser = (data) => (
+  instance({
+    url: '/user/updatecurrent',
+    method: 'put',
+    data
+  })
+)

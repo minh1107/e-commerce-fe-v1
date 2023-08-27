@@ -2,27 +2,39 @@ import React from 'react'
 import icons from '../../utils/icons'
 import { Link } from 'react-router-dom'
 import paths from '../../utils/paths'
-import { Button } from '@mui/material'
-import { useSelector } from 'react-redux'
+import { Button, Menu, MenuItem } from '@mui/material'
+import { useDispatch, useSelector } from 'react-redux'
+import { logout } from 'stores/product/productSlice'
 
 const Header = () => {
   const { RiPhoneFill, MdEmail, BsHandbagFill, FaUserCircle } = icons
   const {currentUser} = useSelector(state => state.userReducer)
-  console.log(currentUser)
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const dispatch = useDispatch()
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  console.log(currentUser.data.role)
   return (
-    <div className='flex justify-between w-main h-[110px] items-center'>
+    <div className='flex justify-between xl:w-main md:w-tablet h-[110px] items-center'>
         <Link to={paths.HOME}>
         <img src='https://res.cloudinary.com/dkc3cgreu/image/upload/v1692246358/electronicStore/logo/logo_digital_new_250x_nkrya1.png' className='w-[234px] h-6' alt=''/>
         </Link>
         <div className='flex text-[13px]'>
-            <div className='flex flex-col items-center px-4 border-r'>
+            <div className='xl:flex hidden flex-col items-center px-4 border-r'>
               <span className='flex gap-4 items-center'>
                 <RiPhoneFill color='red'/>
                 <span className='font-semibold'>(+1800) 000 8808</span>
               </span>
               <span>Mon-Sat 9:00AM - 8:00PM</span>
             </div>
-            <div className='flex flex-col items-center px-4 border-r'>
+            <div className='flex xl:flex hidden flex-col items-center px-4 border-r'>
               <span className='flex gap-4 items-center'>
                 <MdEmail color='red'/>
                 <span className='font-semibold'>SUPPORT@TADATHEMES.COM</span>
@@ -33,15 +45,33 @@ const Header = () => {
               <BsHandbagFill color='red'/>
               <span>0 Item(s)</span>
             </div>
-            {
-              currentUser ? 
-              <Link to={+currentUser?.data.role == 0 ? `/${paths.MEMBER}/${paths.MEMBER}` : `/${paths.ADMIN}/${paths.DASHBOARD}`}>
-                <Button color='error' className='flex items-center gap-2 hover:cursor-pointer justify-center px-4'>
-                  <FaUserCircle size={24} />
-                  <p>Profile</p>
-                </Button>
-              </Link> : <></>
-            }
+                <div>
+                  <Button
+                    startIcon={<FaUserCircle size={24} />}
+                    color='error' className='flex items-center gap-2 hover:cursor-pointer justify-center px-4'
+                    id="basic-button"
+                    aria-controls={open ? 'basic-menu' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? 'true' : undefined}
+                    onClick={handleClick}
+                  >
+                    Profile
+                  </Button>
+                  <Menu
+                    id="basic-menu"
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    MenuListProps={{
+                      'aria-labelledby': 'basic-button',
+                    }}
+                  >
+                    <MenuItem onClick={handleClose}><Link to={`/${paths.MEMBER}`}>Profile</Link></MenuItem>
+                    <MenuItem onClick={handleClose}>Cart</MenuItem>
+                    {currentUser?.data?.role == 1 && <MenuItem onClick={handleClose}><Link to={`/${paths.ADMIN}/${paths.DASHBOARD}`}>Admin dashboard</Link></MenuItem>}
+                    <MenuItem onClick={() => dispatch(logout())}><Link to={`/${paths.LOGIN}`}>Logout</Link></MenuItem>
+                  </Menu>
+                </div>
         </div>
     </div>
   )

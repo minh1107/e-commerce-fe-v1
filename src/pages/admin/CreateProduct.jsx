@@ -11,24 +11,27 @@ import {
   Typography,
 } from "@mui/material";
 import { apiCreateProduct } from "apis";
+import Loading from "components/Loading/Loading";
 import MarkDownEditor from "components/common/MarkDownEditor";
 import { SelectCustom } from "components/common/SelectCustom";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { showModal } from "stores/app/appSlice";
+import Swal from "sweetalert2";
 import icons from "utils/icons";
 
-const { BsCloudUploadFill } = icons;
 const CreateProduct = () => {
   const {
     handleSubmit,
     register,
     formState: { errors },
-    setValue,
+    setValue, reset
   } = useForm();
-
+  const dispatch = useDispatch()
   const [category, setCategory] = useState();
   const { productCategory } = useSelector((state) => state.appReducer);
+  const { isProductEdit } = useSelector(state => state.productReducer)
   console.log(productCategory?.data);
   const [payload, setPayload] = useState({ description: "" });
   const [invalidField, setInvalidField] = useState([]);
@@ -67,27 +70,33 @@ const CreateProduct = () => {
   );
 
   const handleCreateProduct = async (data) => {
-    const req = { ...data, ...payload, ...selectedThumb, ...selectedImages };
-    console.log(req);
-    const formData = new FormData();
-    formData.append('title', req.title);
-    formData.append('category', req.category);
-    formData.append('price', req.price);
-    formData.append('quantity', req.quantity);
-    formData.append('brand', req.brand);
-    formData.append('color', req.color);
-    formData.append('description', req.description);
-    formData.append('thumb', req.thumb);
-    for (const image of req.images) {
-      formData.append('images', image);
-    }
-    console.log(formData)
-    const res = await apiCreateProduct(formData);
-    console.log(res);
+      const req = { ...data, ...payload, ...selectedThumb, ...selectedImages };
+      const formData = new FormData();
+      formData.append('title', req.title);
+      formData.append('category', req.category);
+      formData.append('price', req.price);
+      formData.append('quantity', req.quantity);
+      formData.append('brand', req.brand);
+      formData.append('color', req.color);
+      formData.append('description', req.description);
+      formData.append('thumb', req.thumb);
+      for (const image of req.images) {
+        formData.append('images', image);
+      }
+      dispatch(showModal({isShowModal: true, modalChildren: <Loading />}))
+      const res = await apiCreateProduct(formData);
+      dispatch(showModal({isShowModal: false, modalChildren: <Loading />}))
+      if(res.status) {
+        Swal.fire("Tạo thành công", res.createProduct, 'success')
+        setPayload({ description: "" })
+        setSelectedImages([])
+        setSelectedThumb(null)
+        reset()
+      } else Swal.fire('Tạo thất bại', res.createProduct, 'error')
   };
 
   return (
-    <div>
+    <div className="">
       <Typography variant="h3" color={"#EE3131"} mb={4}>
         Create Product
       </Typography>
@@ -163,7 +172,8 @@ const CreateProduct = () => {
             )}
           </Box>
           <div className="flex">
-            <div className="">
+            <div className="flex flex-col">
+              <label>Chọn thumbnail</label>
               <input
                 type="file"
                 onChange={handleThumbSelect}
@@ -191,7 +201,8 @@ const CreateProduct = () => {
                 </div>
               )}
             </div>
-            <div >
+            <div className="flex flex-col">
+              <label>Chọn các image sản phẩm</label>
               <input
                 type="file"
                 onChange={handleImageSelect}
