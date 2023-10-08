@@ -95,21 +95,19 @@ const DetailProduct = () => {
       </div>
       <div className='xl:w-main md:w-tablet m-auto flex mt-4'>
         <div className='w-2/5 flex gap-4 flex-col'>
-          {/* <img src={product?.thumb} alt="product" className='h-[458px] border w-[458px] object-cover'/> */}
-          <div className='h-[458px] border w-[458px] object-contain'>
+          <div className='w-[400px] border'>
               <ReactImageMagnify {...{
                       smallImage: {
                           alt: 'detail product',
-                          height: 458,
-                          width: 458,
-                          src: product?.images[imgSetted] || product?.thumb
-                      },
+                          src: product?.images[imgSetted] || product?.thumb,
+                          sizes: '(max-width: 480px) 100vw, (max-width: 1200px) 30vw, 360px',
+                          isFluidWidth: true,
+                        },
                       largeImage: {
                           src: product?.images[imgSetted] || product?.thumb,
-                          width: 2000,
-                          height: 2000,
-                          enlargedImageContainerDimensions: {width: '2000px', height: '2000px'}
-                      }
+                          width: 1000,
+                          height: 2000
+                        }
               }} />
           </div>
           <div className='w-full'>

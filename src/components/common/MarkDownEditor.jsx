@@ -1,7 +1,7 @@
 import React, { memo, useRef } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 
-function MarkDownEditor({label, changeValue, name , invalidField, setInvalidField ,initialValue}) {
+function MarkDownEditor({label, changeValue, name , invalidField, setInvalidField ,initialValue, height}) {
     
   return (
     <>
@@ -11,7 +11,7 @@ function MarkDownEditor({label, changeValue, name , invalidField, setInvalidFiel
         // "<p>This is the initial content of the editor.</p>"
         initialValue={initialValue}
         init={{
-          height: 200,
+          height: height || 200,
           menubar: true,
           plugins: [
             'advlist autolink lists link image charmap print preview anchor',

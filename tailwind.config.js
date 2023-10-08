@@ -12,9 +12,9 @@ module.exports = {
         main: '#ee3131'
       },
       width: {
-        main: '1180px',
-        tablet: '900px',
-        phone: '450px'
+        main: '90vw',
+        tablet: '80vw',
+        phone: '100vw'
       },
       fontFamily: {
         poppin: ['Poppins', 'sans-serif']
@@ -53,7 +53,7 @@ module.exports = {
         faded: 'faded .4s ease-in-out forwards',
         zoom: 'zoom 0.4s ease-in-out forwards',
         unZoom: 'unZoom 0.4s ease-in-out forwards',
-        slideTop: 'slide-top 0.1s ease-in-out forwards' 
+        slideTop: 'slide-top 0.2s ease-in-out forwards' 
       },
       keyframes: {
         toRight: {

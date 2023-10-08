@@ -68,3 +68,17 @@ export const apiUpdateInfoUser = (data) => (
     data
   })
 )
+
+export const apiDeleteCart = (pid) => (
+  instance({
+    url: `/user/updateCart/${pid}`,
+    method: 'put'
+  })
+)
+
+export const apiUpdateWishlist = (pid) => (
+  instance({
+    url: `/user/updateWishlist/${pid}`,
+    method: 'put'
+  })
+)

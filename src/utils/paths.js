@@ -6,7 +6,7 @@ const paths = {
     PRODUCTS: ':category',
     BLOGS: 'blogs',
     OUR_SERVICES: 'services',
-    FAQ: 'faqs',
+    CONTACT_US: 'contactus',
     DETAIL_PRODUCT_CATEGORY_PID_TITLE: ':category/:pid/:title',
     FINAL_REGISTER: 'finalregister/:status',
     RESET_PASSWORD: 'resetpassword/:token',
@@ -18,12 +18,14 @@ const paths = {
     MANAGER_PRODUCT: 'manager-product',
     MANAGER_ORDER: 'manager-order',
     CREATE_PRODUCT: 'create-product',
+    CREATE_BLOG: 'create-blog',
     // member
     MEMBER: 'member',
     PERSONAL: 'personal',
     CART: 'cart',
     SHOPPING_HISTORY: 'shoppinghistory',
     WISHLIST: 'wishlist',
+    ORDER: 'order',
 
     ALL: '*'
 }

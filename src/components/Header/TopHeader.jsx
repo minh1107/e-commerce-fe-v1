@@ -31,7 +31,7 @@ const TopHeader = () => {
             <div>
                 {(isLoggedIn && currentUser) ?
                  <div className='flex gap-2 items-center'>
-                  <span>Well come {currentUser?.data.lastname} {currentUser?.data.firstname}</span> 
+                  <span>Well come {currentUser?.data?.lastname} {currentUser?.data?.firstname}</span> 
                   <span onClick={() => dispatch(logout())} className='hover:bg-white transition duration-500 ease-in-out hover:cursor-pointer rounded-full p-2'><MdLogout className='hover:text-black' size={20}/></span>
                  </div>
                  : <Link className='hover:text-gray-800' to={paths.LOGIN}>Sign In or Create Account</Link> 

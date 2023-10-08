@@ -6,7 +6,7 @@ const {
   BiSolidUserPin,
   FaProductHunt,
   IoCreate,
-  BsFillCartCheckFill, MdFavorite, GrPersonalComputer, FaHistory
+  BsFillCartCheckFill, MdFavorite, GrPersonalComputer, FaHistory, FaBlog
 } = icons;
 
 export const navigation = [
@@ -32,8 +32,8 @@ export const navigation = [
   },
   {
     id: 1,
-    value: "FAQs",
-    path: `/${paths.FAQ}`,
+    value: "CONTACT US",
+    path: `/${paths.CONTACT_US}`,
   },
 ];
 
@@ -68,11 +68,23 @@ export const pathAdmin = [
     path: `/${paths.ADMIN}/${paths.MANAGER_ORDER}`,
     icon: BsFillCartCheckFill
   },
+  {
+    id: 6,
+    value: "Create blog",
+    path: `/${paths.ADMIN}/${paths.CREATE_BLOG}`,
+    icon: FaBlog
+  },
 ];
 
 
 
 export const pathProfile = [
+  {
+    id: 1,
+    value: "Order",
+    path: `/${paths.MEMBER}/${paths.ORDER}`,
+    icon: BsFillCartCheckFill
+  },
   {
     id: 1,
     value: "Personal",
