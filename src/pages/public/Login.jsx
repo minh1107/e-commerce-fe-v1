@@ -38,7 +38,7 @@ const Login = () => {
   const [isRegister, setIsRegister] = useState(false)
   const handleSubmit = async(e) => {
       e.preventDefault();
-      const {firstname, lastname, mobile, ...data} = payload
+      const {firstname, lastname, mobile, email, password} = payload
       if(isRegister) {
             dispatch(showModal({isShowModal: true, modalChildren: <Loading />}))
             const response = await apiRegister(payload)
@@ -48,13 +48,16 @@ const Login = () => {
             if(response?.status) setIsRegister(false)
           }) 
       } else {
-        const res = await apiLogin(data)
-        if(res?.status) {
-            dispatch(login({isLoggedIn: true, token: res.accessToken, userData: res.data}))
-            Swal.fire("Đăng nhập thành công", res.message, 'success').then(() => {
-            navigate(`/${paths.HOME}`)
-        })
-        } else Swal.fire('Đăng nhập thất bại', res.message, 'error')
+        try {
+          const res = await apiLogin({email, password})
+          if(res?.status) {
+              dispatch(login({isLoggedIn: true, token: res.accessToken, userData: res?.data}))
+              Swal.fire("Đăng nhập thành công", res.message, 'success').then(() => {
+              navigate(`/${paths.HOME}`)
+          })          
+        }} catch (error) {
+          Swal.fire('Đăng nhập thất bại', 'loi', 'error')
+        }
       }
   }
 
