@@ -12,8 +12,8 @@ import ProductInfomation from '../../components/ProductInfomation/ProductInfomat
 import CustomSlider from '../../components/common/CustomSlider'
 import SelectOptionProduct from 'components/common/SelectOptionProduct'
 import { apiCreateAndUpdateCart } from 'apis/cart'
-
-
+import Zoom from 'react-medium-image-zoom'
+import 'react-medium-image-zoom/dist/styles.css'
 
 const { BsSquareFill, RxSlash } = icons
 let settings
@@ -34,8 +34,12 @@ const DetailProduct = () => {
       if(response.status) setProduct(response?.product)
     }
     const fetchInterestedProduct = async() => {
-      const response = await apiGetAllProduct(product?.category?.toLowerCase())
-      if(response?.status) setInterestedProduct(response?.product)
+      try {
+        const response = await apiGetAllProduct(product?.category?.toLowerCase())
+        if(response?.status) setInterestedProduct(response?.product)
+      } catch (error) {
+        console.log(error)
+      }
     }
     // Tăng giảm số lượng sản phẩm
     const handleReduceQuantity = () => {
@@ -92,20 +96,10 @@ const DetailProduct = () => {
       </div>
       <div className='xl:w-main md:w-tablet m-auto flex mt-4'>
         <div className='w-2/5 flex gap-4 flex-col'>
-          <div className='w-[400px] border'>
-              <ReactImageMagnify {...{
-                      smallImage: {
-                          alt: 'detail product',
-                          src: product?.images[imgSetted] || product?.thumb,
-                          sizes: '(max-width: 480px) 100vw, (max-width: 1200px) 30vw, 360px',
-                          isFluidWidth: true,
-                        },
-                      largeImage: {
-                          src: product?.images[imgSetted] || product?.thumb,
-                          width: 1000,
-                          height: 2000
-                        }
-              }} />
+          <div className='border'>
+            <Zoom>
+              <img src={product?.images[imgSetted] || product?.thumb} alt="" className='w-[600px] h-[500px] object-contain'/>
+            </Zoom>
           </div>
           <div className='w-full'>
             <Slider {...settings}>
@@ -146,7 +140,7 @@ const DetailProduct = () => {
                       <button className='border-l py-2 border-black px-2' onClick={handleIncreaseQuantity}> + </button>
                     </div>
                   </Box>
-                  <Button onClick={handleSubmit} className='bg-main color-white font-semibold text-[16px]' color='error' variant='contained'>ADD TO CART</Button>
+                  <Button onClick={handleSubmit} className='bg-main color-white font-semibold  w-fit text-[16px]' color='error' variant='contained'>ADD TO CART</Button>
                   <Link to={`/`} className='text-[14px] hover:text-main'>&lt;- BACK TO SMARTPHONE</Link>
                 </Box>
           </div>

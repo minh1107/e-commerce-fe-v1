@@ -34,14 +34,14 @@ const Header = () => {
         <div className="xl:flex hidden flex-col items-center px-4 border-r">
           <span className="flex gap-4 items-center">
             <RiPhoneFill color="red" />
-            <span className="font-semibold">(+1800) 000 8808</span>
+            <span className="font-semibold">032 9933 496</span>
           </span>
           <span>Mon-Sat 9:00AM - 8:00PM</span>
         </div>
         <div className="xl:flex hidden flex-col items-center px-4 border-r">
           <span className="flex gap-4 items-center">
             <MdEmail color="red" />
-            <span className="font-semibold">SUPPORT@TADATHEMES.COM</span>
+            <span className="font-semibold">minhnqdeveloper.gmail.com</span>
           </span>
           <span>Online Support 24/7</span>
         </div>

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import paths from '../../utils/paths'
 import { Link } from 'react-router-dom'
-import { UseSelector, useSelector } from 'react-redux/es/hooks/useSelector'
+import { useSelector } from 'react-redux/es/hooks/useSelector'
 import { useDispatch } from 'react-redux'
 import { getCurrentUser } from '../../stores/user/asyncAction'
 import icons from '../../utils/icons'
@@ -26,7 +26,7 @@ const TopHeader = () => {
     <div className='h-10 w-full flex bg-main'>
         <div className='xl:w-main md:w-tablet m-auto h-full text-white flex text-sm items-center justify-between'>
             <div className=''>
-                <p>ORDER ONLINE OR CALL US (+1800) 000 8808</p>
+                <p>Đặt hàng tại: 0329933496</p>
             </div>
             <div>
                 {(isLoggedIn && currentUser) ?

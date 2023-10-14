@@ -1,9 +1,7 @@
-import { Label } from "@mui/icons-material";
 import {
   Box,
   Button,
   FormControl,
-  Input,
   InputLabel,
   MenuItem,
   Select,
@@ -13,8 +11,7 @@ import {
 import { apiCreateProduct } from "apis";
 import Loading from "components/Loading/Loading";
 import MarkDownEditor from "components/common/MarkDownEditor";
-import { SelectCustom } from "components/common/SelectCustom";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { showModal } from "stores/app/appSlice";

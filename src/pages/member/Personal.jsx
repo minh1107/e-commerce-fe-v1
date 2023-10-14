@@ -27,12 +27,19 @@ const Personal = () => {
       formData.append('avatar', data.avatar[0])
       console.log(formData)
       dispatch(showModal({isShowModal: true, modalChildren: <Loading />}))
-      const res = await apiUpdateInfoUser(formData)
-      if(res.status) {
-        dispatch(showModal({isShowModal: false, modalChildren: <Loading />}))
-        Swal.fire('Cập nhật thông tin thành công', res.status, 'success')
-        dispatch(getCurrentUser())
-      } 
+      try {
+        const res = await apiUpdateInfoUser(formData)
+        if(res.status) {
+          dispatch(showModal({isShowModal: false, modalChildren: <Loading />}))
+          Swal.fire('Cập nhật thông tin thành công', res.status, 'success')
+          dispatch(getCurrentUser())
+        }  else {
+          dispatch(showModal({isShowModal: false, modalChildren: <Loading />}))
+          Swal.fire('Cập nhật thông tin thất bại', res.status, 'error')
+        }
+      } catch (error) {
+        Swal.fire('Cập nhật thông tin thất bại', error.message, 'error')
+      }
     }
   }
 

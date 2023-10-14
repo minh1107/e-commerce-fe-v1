@@ -76,8 +76,8 @@ const Products = () => {
     [sort])
 
   const handleChangeIndex = (e, page) => {
-    console.log(page)
     setPage(page)
+    window.scrollTo(0,0);
   }
 
     useEffect(() => {
@@ -125,7 +125,7 @@ const Products = () => {
         </div>
       </div>
       <div className='mx-auto xl:w-main md:w-tablet flex justify-end mb-10'>
-          <PaginationCustom recordsNumber={totalProducts} recordPerPage={5} onclick={handleChangeIndex} />
+          <PaginationCustom recordsNumber={totalProducts} recordPerPage={process.env.REACT_APP_LIMIT_RECORD || 16} onclick={handleChangeIndex} />
       </div>
     </div>
   )

@@ -42,16 +42,14 @@ const Product = ({ productData, isNew, widthImg, isSale, isLast }) => {
           >
             <SelectOption icon={AiTwotoneHeart} />
             <Link
-              to={`/${productData.category.toLowerCase()}/${productData._id}/${
-                productData.title
+              to={`/${productData?.category.toLowerCase()}/${productData?._id}/${
+                productData?.title
               }`}
             >
               <SelectOption icon={MdMenu} />
             </Link>
             <SelectOption
-              to={`/${productData.category.toLowerCase()}/${productData._id}/${
-                productData.title
-              }`}
+              to={`/${productData?.category.toLowerCase()}/${productData?._id}/${productData?.title}`}
               icon={FaEye}
             />
           </div>
