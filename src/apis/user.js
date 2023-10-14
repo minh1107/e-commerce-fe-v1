@@ -82,3 +82,17 @@ export const apiUpdateWishlist = (pid) => (
     method: 'put'
   })
 )
+
+export const apiGetWishList = (id) => (
+  instance({
+    url: '/user/wishlists',
+    method: 'get'
+  })
+)
+
+export const apiDeleteWishList = (pid) => (
+  instance({
+    url: `/user/wishlist/${pid}`,
+    method: 'delete',
+  })
+)

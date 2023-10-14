@@ -5,6 +5,7 @@ import paths from "../../utils/paths";
 import { Button, Menu, MenuItem } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "stores/product/productSlice";
+import logo  from 'assets/image/pngwing.com.png'
 
 const Header = () => {
   const { RiPhoneFill, MdEmail, BsHandbagFill, FaUserCircle } = icons;
@@ -19,13 +20,13 @@ const Header = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  console.log(currentUser)
   return (
     <div className="flex justify-between xl:w-main md:w-tablet h-[110px] items-center">
       <Link to={paths.HOME}>
         <img
-          src="https://res.cloudinary.com/dkc3cgreu/image/upload/v1692246358/electronicStore/logo/logo_digital_new_250x_nkrya1.png"
-          className="w-[234px] h-6"
+          src={logo}
+          className="w-[234px] h-[10rem] object-contain "
           alt=""
         />
       </Link>
@@ -44,10 +45,10 @@ const Header = () => {
           </span>
           <span>Online Support 24/7</span>
         </div>
-        <div className="flex items-center justify-center gap-2 px-4 border-r">
+        <Link to={`/${paths.MEMBER}/${paths.CART}`} className="flex items-center justify-center gap-2 px-4 border-r">
           <BsHandbagFill color="red" />
-          <span>0 Item(s)</span>
-        </div>
+          <span>{currentUser?.data?.cart?.length} Item(s)</span>
+        </Link>
         <div>
           <Button
             startIcon={<FaUserCircle size={24} />}
@@ -73,7 +74,9 @@ const Header = () => {
             <MenuItem onClick={handleClose}>
               <Link to={`/${paths.MEMBER}/${paths.ORDER}`}>Profile</Link>
             </MenuItem>
-            <MenuItem onClick={handleClose}>Cart</MenuItem>
+            <MenuItem onClick={handleClose}>
+              <Link to={`/${paths.MEMBER}/${paths.CART}`}>Cart</Link>
+            </MenuItem>
             {currentUser?.data?.role == 1 && (
               <MenuItem onClick={handleClose}>
                 <Link to={`/${paths.ADMIN}/${paths.DASHBOARD}`}>

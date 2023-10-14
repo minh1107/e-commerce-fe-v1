@@ -21,7 +21,7 @@ const OrderInfo = () => {
   console.log(currentOrder);
   return (
     <div>
-      {currentOrder.map((item) => (
+      {currentOrder?.map((item) => (
         <Box sx={{ width: "100%" }}>
           <Stepper activeStep={1} alternativeLabel>
             {steps.map((label) => (
@@ -30,7 +30,7 @@ const OrderInfo = () => {
               </Step>
             ))}
           </Stepper>
-          {item?.products.map((el) => (
+          {item?.products?.map((el) => (
             <div>
                 {el.color}
             </div>

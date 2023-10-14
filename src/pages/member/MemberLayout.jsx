@@ -27,7 +27,7 @@ const { AiFillCaretLeft, GiReturnArrow } = icons;
 function MemberLayout() {
   const { isLoggedIn, currentUser } = useSelector((state) => state.userReducer);
   const [open, setOpen] = useState(false);
-  if (!isLoggedIn || !currentUser || currentUser?.data.role != 1)
+  if (!isLoggedIn || !currentUser || currentUser?.data.role == null)
     return <Navigate to={`/${paths.LOGIN}`} replace={true} />;
 
   const handleDrawerOpen = () => {
@@ -68,7 +68,7 @@ function MemberLayout() {
           </IconButton>
         </DrawerHeader>
         <List className="h-full">
-          {pathProfile.map((item, index) => (
+          {pathProfile?.map((item, index) => (
             <Link to={item.path}>
               <ListItem
                 key={item.id}

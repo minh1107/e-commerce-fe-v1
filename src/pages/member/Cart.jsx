@@ -17,7 +17,7 @@ const Cart = ({navigate}) => {
 
   const fetchAllOrder = async () => {
     const res = await apiCurrentCart();
-    setCart(res?.data.cart);
+    setCart(res?.data?.cart);
   };
   const { userCurrent } = useSelector(state => state.userReducer)
 
@@ -41,7 +41,7 @@ const Cart = ({navigate}) => {
       let total = 0
       checked.forEach(item => {
         let p = cart.find((e, index) => index == +item)
-        total += parseInt(p.price) * p.count
+        total += parseInt(p?.price) * p?.count
       })
       setTotalPrice(total)
     }
@@ -50,7 +50,7 @@ const Cart = ({navigate}) => {
   
   useEffect(() => {
     // Initialize quantityNumber with the initial quantity values from the cart
-    const initialQuantities = cart.map(item => item.count || 1);
+    const initialQuantities = cart?.map(item => item?.count || 1);
     setQuantityNumber(initialQuantities);
   }, [cart]);
 
@@ -65,7 +65,6 @@ const Cart = ({navigate}) => {
 
   const handleDelete = async(pid) => {
     const res = await apiDeleteCart(pid)
-    console.log(res)
     if(res.status) {
       await fetchAllOrder()
     } else {
@@ -79,15 +78,11 @@ const Cart = ({navigate}) => {
       if(!wishlist[index]) {
         wishlist[index] = true
       } else  wishlist[index] = false
-      console.log(wishlist)
       setIsAddWishList(wishlist)
-      console.log(res)
   }
-
   const handleOrder = async() => {
-    console.log(cart)
     let filterCart = cart.filter((item, index) => checked.includes(index.toString()))
-    const finalCart = filterCart.map(item => ({
+    const finalCart = filterCart?.map(item => ({
         color: item.color,
         quantity: item.count,
         internal: item.internal,
@@ -120,21 +115,21 @@ const Cart = ({navigate}) => {
               <div key={item} className="flex items-center bg-gray-100 rounded-xl m-6 p-4">
                 <div className="flex items-center flex-5 gap-4">
                   <input type="checkbox" value={index} onChange={(e) => handleSelectProduct(e,index, item)} className="h-4 w-4"/>
-                  <img src={item?.product.thumb} alt="" className="rounded-xl w-20 h-20 object-contain"/>
-                  <p>{item?.product.title}</p>
+                  <img src={item?.product?.thumb} alt="" className="rounded-xl w-20 h-20 object-contain"/>
+                  <p>{item?.product?.title}</p>
                 </div>
                 <div className="flex-2">
                   <h1 className="text-main text-lg">{formatMoney(item?.price)} VND</h1>
                   <div className="flex items-center">
-                    <Button onClick={() => handleToggleWishlist(item.product._id, index)} className="rounded-md"><AiFillHeart size={24} 
+                    <Button onClick={() => handleToggleWishlist(item?.product?._id, index)} className="rounded-md"><AiFillHeart size={24} 
                     className={`${isAddWishList[index] ? 'text-main' : 'text-gray-200'} hover:cursor-pointer`}/></Button>
-                    <Button onClick={() => handleDelete(item.product._id)} className="rounded-md"><ImBin size={24} className="text-gray-500 hover:cursor-pointer"/></Button>
+                    <Button onClick={() => handleDelete(item?.product?._id)} className="rounded-md"><ImBin size={24} className="text-gray-500 hover:cursor-pointer"/></Button>
                   </div>
                 </div>
                 <div className='bg-[#f6f6f6] className="flex-2" flex gap-2 w-fit'>
                     <label>Số lượng: </label>
                     <input type="number" className='w-10 bg-[#f6f6f6] border border-black rounded-md text-center' 
-                    onChange={(e) => handleChangeQuantity(e, index)} value={item.count} />
+                    onChange={(e) => handleChangeQuantity(e, index)} value={item?.count} />
                   </div>
               </div>
             ))}

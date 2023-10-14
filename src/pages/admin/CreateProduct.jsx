@@ -158,6 +158,13 @@ const CreateProduct = () => {
                 <MenuItem value="blue">Blue</MenuItem>
               </Select>
             </FormControl>
+            <FormControl variant="outlined" fullWidth margin="normal">
+              <InputLabel>Color</InputLabel>
+              <Select {...register("color")} label="Color">
+                <MenuItem value="yellow">Yellow</MenuItem>
+                <MenuItem value="blue">Blue</MenuItem>
+              </Select>
+            </FormControl>
           </Box>
           <Box>
             <MarkDownEditor

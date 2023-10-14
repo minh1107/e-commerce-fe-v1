@@ -14,11 +14,12 @@ const activeStyles = "bg-white border border-b-0";
 const notActiveStyles = "border";
 
 // Hàm thông tin sản phầm
-const ProductInfomation = ({pid}) => {
+const ProductInfomation = ({pid, product}) => {
   const [activeTab, setActiveTab] = useState(1);
   const [report, setReport] = useState(null)
   const [infoProduct, setInfoProduct] = useState()
   const dispatch = useDispatch()
+  const detailProduct = [ product?.descriptionDetail,product?.warranty, product?.payment, product?.delivery ]
   const { isLoggedIn }  = useSelector(state => state.userReducer)
   console.log(report)
   const fetchProduct = async() => {
@@ -101,8 +102,10 @@ const ProductInfomation = ({pid}) => {
                 ))}
               </div>
             </div> 
-            : tabDetailProduct.find((item, index) => index+1 === activeTab)?.content}
-      </ul>
+            : <div>
+              {detailProduct.find((item, index) => index+1 === activeTab)}
+            </div>
+        }</ul>
     </>
   );
 };

@@ -35,4 +35,8 @@ export const HtmlStringToReact = (htmlString) => {
   return reactElement;
 };
 
+export function isString(variable) {
+    return typeof variable === 'string';
+  }
+
 

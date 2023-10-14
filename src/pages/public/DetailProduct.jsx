@@ -28,14 +28,13 @@ const DetailProduct = () => {
     const [internal, setInternal] = useState()
     const [color, setColor] = useState()
 
-
     // Hàm gọi api
     const fetchProduct = async() => {
       const response = await apiGetProduct(pid)
-      if(response.status) setProduct(response.product)
+      if(response.status) setProduct(response?.product)
     }
     const fetchInterestedProduct = async() => {
-      const response = await apiGetAllProduct(product?.category.toLowercase)
+      const response = await apiGetAllProduct(product?.category?.toLowerCase())
       if(response?.status) setInterestedProduct(response?.product)
     }
     // Tăng giảm số lượng sản phẩm
@@ -51,7 +50,7 @@ const DetailProduct = () => {
     }
     const handleChangeQuantity = (e) => {
       let inputValue = parseInt(e.target.value);
-      if (!isNaN(inputValue) && inputValue >= 0 && inputValue <= product.quantity) {
+      if (!isNaN(inputValue) && inputValue >= 0 && inputValue <= product?.quantity) {
         setQuantityNumber(inputValue);
       } else if(e.target.value == ""){
         setQuantityNumber(0);
@@ -69,7 +68,7 @@ const DetailProduct = () => {
       dots: false,
       infinite: true,
       speed: 500,
-      slidesToShow: product?.images.length == 2 ? 2 : 3,
+      slidesToShow: product?.images?.length == 2 ? 2 : 3,
       slidesToScroll: 1,
     };
     const handleSelectOptionsProduct = (title, item) => {
@@ -78,15 +77,13 @@ const DetailProduct = () => {
       } else if(title == 'Internal') {
         setInternal(item)
       } else if(title == 'Ram') setRam(item)
-    console.log(color, ram, internal)
 
     }
     const handleSubmit = async() => {
       const req = {quantity:quantityNumber, color, ram, internal, pid, price: product.price}
       const res = await apiCreateAndUpdateCart(req)
-      console.log(res)
     }
-    console.log('detail product', product)
+    
   return (
     <div className='w-full flex flex-col'>
       <div className='h-20 flex justify-center items-center flex-col bg-[#f7f7f7] w-full'>
@@ -133,14 +130,14 @@ const DetailProduct = () => {
                     <p className='mt-[1px]'>{product?.totalRating} reviews</p>
                 </div>
                 <ul className='text-[14px]'>
-                  {product?.description.length > 1 ? product?.description?.map(item => (
+                  {product?.description?.length > 1 ? product?.description?.map(item => (
                     <li key={item} className='flex items-center mb-[5px] h-5 gap-2 text-[#505050]'><BsSquareFill size={4}/> {item}</li>
                   )) : HtmlStringToReact(product?.description)}
                 </ul>
                 <Box className="flex flex-col gap-2.5 mb-2.5">
-                  <SelectOptionProduct type={product?.internal.length ? product?.internal : ['32GB'] } title="Internal" onclick={handleSelectOptionsProduct}/>
-                  <SelectOptionProduct type={product?.color.length ? product?.color : ['Red']} title="Color" onclick={handleSelectOptionsProduct}/>
-                  <SelectOptionProduct type={product?.ram.length ? product?.ram : ['4G']} title="Ram" onclick={handleSelectOptionsProduct}/>
+                  <SelectOptionProduct type={product?.internal } title="Internal" onclick={handleSelectOptionsProduct}/>
+                  <SelectOptionProduct type={product?.color} title="Color" onclick={handleSelectOptionsProduct}/>
+                  <SelectOptionProduct type={product?.ram} title="Ram" onclick={handleSelectOptionsProduct}/>
                   <Box className="flex items-center ">
                     <h3 className='mr-2.5 text-[14px] font-semibold'>Quantity</h3>
                     <div className='bg-[#f6f6f6]  w-fit '>
@@ -155,7 +152,7 @@ const DetailProduct = () => {
           </div>
         </div>
         <ul className='w-1/5 '>
-        { policy.map(el => (  
+        { policy?.map(el => (  
           <li className='flex items-center p-2.5 mb-2.5 border gap-2'>
             <el.icon size={36} color='white' className='p-2 bg-slate-800 rounded-full'/>
             <div className=''>
@@ -166,7 +163,7 @@ const DetailProduct = () => {
         </ul>
       </div>
       <div className='xl:w-main md:w-tablet m-auto mt-5'>
-        <ProductInfomation pid={pid}/>
+        <ProductInfomation pid={pid} product={product}/>
       </div>
       <div className='xl:w-main md:w-tablet m-auto mb-28'>
         <h1 className="font-bold mb-5 text-xl py-4 border-b-4 w-full border-b-main">

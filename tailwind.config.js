@@ -6,10 +6,10 @@ module.exports = {
   theme: {
     extend: {
       backgroundColor: {
-        main: '#ee3131',
+        main: '#146290',
       },
       textColor: {
-        main: '#ee3131'
+        main: '#146290'
       },
       width: {
         main: '90vw',
@@ -20,7 +20,7 @@ module.exports = {
         poppin: ['Poppins', 'sans-serif']
       },
       borderColor: {
-        main: '#ee3131'
+        main: '#146290'
       },
       flex: {
         '2': '2 2 0',
