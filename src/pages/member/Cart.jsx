@@ -1,7 +1,8 @@
 import { Button, TextField } from "@mui/material";
 import { apiCreateAndUpdateOrder, apiCurrentCart, apiDeleteCart, apiUpdateWishlist } from "apis";
+import Paypal from "components/common/Paypal";
 import withBaseComponent from "hocs/withBaseComponent";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { formatMoney, formatPrice } from "utils/helper";
@@ -19,7 +20,7 @@ const Cart = ({navigate}) => {
     const res = await apiCurrentCart();
     setCart(res?.data?.cart);
   };
-  const { userCurrent } = useSelector(state => state.userReducer)
+  const { currentUser } = useSelector(state => state.userReducer)
 
   const handleSelectProduct = (event, index, product) => {
     var updatedList = [...checked];
@@ -31,11 +32,18 @@ const Cart = ({navigate}) => {
     setChecked(updatedList);
   }
 
+  const handleToggleAllCheckbox = () => {
+    const newArray = Array.from(Array(cart?.length).keys()).map(i => i.toString())
+    if(newArray.length !== checked.length) {
+      setChecked(newArray)
+    } else {
+      setChecked([])
+    }
+  }
+
   useEffect(() => {
-    console.log(checked )
     if(checked.length == 0) {
       setTotalPrice(0)  
-      console.log(1)
     }
     else {
       let total = 0
@@ -106,14 +114,14 @@ const Cart = ({navigate}) => {
     <div className="flex gap-4">
         <div className="flex-6 ">
           <div className="flex mx-6 xl:mx-8 p-4 items-center gap-4">
-            <input type="checkbox" onChange={() => setChecked(Array.from(10).fill(true))} className="w-4 h-4"/>
+            <input type="checkbox" onChange={handleToggleAllCheckbox} className="w-4 h-4"/>
             <label className="text-[16px] font-semibold">Chọn tất cả {cart?.length} sản phẩm</label>
           </div>
           <div className="overflow-y-scroll h-[750px]">
             {cart?.map((item, index) => (
               <div key={item} className="flex items-center bg-gray-100 rounded-xl m-6 p-4">
                 <div className="flex items-center flex-5 gap-4">
-                  <input type="checkbox" value={index} onChange={(e) => handleSelectProduct(e,index, item)} className="h-4 w-4"/>
+                  <input type="checkbox" checked={checked.find(i => i === index.toString()) ? true : false} value={index} onChange={(e) => handleSelectProduct(e,index, item)} className="h-4 w-4"/>
                   <img src={item?.product?.thumb} alt="" className="rounded-xl w-20 h-20 object-contain"/>
                   <p>{item?.product?.title}</p>
                 </div>
@@ -137,21 +145,23 @@ const Cart = ({navigate}) => {
         <div className="xl:flex-2 flex-4 bg-gray-100 pb-10 p-4 rounded-md">
           <div className="flex gap-1 mt-4 items-center">
             <FaLocationArrow />
-            <p>{userCurrent?.address || "Ngọc quan đoan hùng phú thọ"}</p>
+            <textarea className="w-full h-[120px] p-3 rounded-md" type="text" defaultValue={currentUser?.data?.address[0]}/>
           </div>
           <br />
           <div className="flex mt-4 flex-col gap-4">
             <p>Thông tin đơn hàng</p>
             <p>Phí tạm tính: {formatPrice(totalPrice, 'VND', 4)}</p>
             <p>Phí giao hàng: {formatPrice(20000, 'VND', 4)}</p>
+            <p>Hình thức thanh toán</p>
           </div>
           <div className="my-4 flex items-center">
             <input type="text" className="outline-none border rounded-md p-3 mr-3" placeholder="Mã giảm giá"/>
             <button className="border bg-main p-3 rounded-md text-white font-serif hover:opacity-80">Áp dụng</button>              
           </div>
           <div className="flex flex-col gap-4">
-            <p>Tổng cộng: {formatPrice(totalPrice+20000, 'VND', 4)} VND</p>
-            <Button onClick={handleOrder} variant="contained" color="error" fullWidth>Thanh toán</Button>
+            <p>Tổng cộng: {formatPrice(totalPrice + 20000, 'VND', 4)} VND</p>
+            <Button onClick={handleOrder} variant="contained" size="large" color="error" fullWidth>Thanh toán khi nhận hàng</Button>
+            <Paypal amount={totalPrice}/>
           </div>
         </div>
     </div>
