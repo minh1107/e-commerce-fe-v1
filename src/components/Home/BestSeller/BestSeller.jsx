@@ -6,6 +6,7 @@ import {
   getBestSellerProducts,
   getNewProducts,
 } from "../../../stores/product/asyncAction";
+import Marquee from "react-fast-marquee";
 
 const tabs = [
   { id: 1, name: "Best seller" },
@@ -69,17 +70,12 @@ const BestSeller = () => {
           widthImg={"w-[243px]"}
         />
       </div>
-      <div className="w-full flex gap-5 hover:cursor-pointer">
-        <img
-          src="https://digital-world-2.myshopify.com/cdn/shop/files/banner1-home2_2000x_crop_center.png?v=1613166657"
-          alt="banner"
-          className="object-contain w-[calc(50%-10px)]"
-        />
-        <img
-          src="https://digital-world-2.myshopify.com/cdn/shop/files/banner2-home2_2000x_crop_center.png?v=1613166657"
-          alt="banner"
-          className="object-contain w-[calc(50%-10px)]"
-        />
+      <div className="w-full flex gap-5 hover:cursor-pointer h-[200px] overflow-y-hidden">
+      <Marquee className="text-run" speed={50} direction="left" style={{overflow: 'hidden'}}>
+            <img src="https://cdn.vietnambiz.vn/2019/8/2/impact-of-ecommerce-on-society-15647219830501355870318-crop-1564722020371805734630.png" alt=""/>
+            <img src="https://cdnimgen.vietnamplus.vn/uploaded/wbxx/2023_02_07/vietnams_ecommerce_forecast_to_continue_booming.jpg" alt="" />
+            <img src="https://hrchannels.com/uptalent/attachments/images/20230421/105829333_thuong-mai-dien-tu-4.png" alt="" />
+      </Marquee>
       </div>
     </div>
   );

@@ -12,61 +12,61 @@ const Donors = () => {
     <Slider {...settings} className="w-[90%] m-auto">
       <div className="flex">
         <img className="mx-auto"
-          src="https://res.cloudinary.com/dkc3cgreu/image/upload/v1693298767/electronicStore/brand/apple_wnwzek.webp"
+          src="https://jumpseller.com/images/learn/create-a-blog/blog.jpg"
           alt=""
         />
       </div>
       <div className="flex">
         <img className="m-auto"
-          src="https://res.cloudinary.com/dkc3cgreu/image/upload/v1693298766/electronicStore/brand/vivo_cxslbm.webp"
+          src="https://jumpseller.com/images/learn/create-a-blog/blog.jpg"
           alt=""
         />
       </div>
       <div className="flex">
         <img className="m-auto"
-          src="https://res.cloudinary.com/dkc3cgreu/image/upload/v1693298766/electronicStore/brand/samsung_inoss6.avif"
+          src="https://jumpseller.com/images/learn/create-a-blog/blog.jpg"
           alt=""
         />
       </div>
       <div className="flex">
         <img className="m-auto"
-          src="https://res.cloudinary.com/dkc3cgreu/image/upload/v1693298766/electronicStore/brand/lg_crxfeq.avif"
+          src="https://jumpseller.com/images/learn/create-a-blog/blog.jpg"
           alt=""
         />
       </div>
       <div className="flex">
         <img className="m-auto"
-          src="https://res.cloudinary.com/dkc3cgreu/image/upload/v1693298766/electronicStore/brand/htc_ancxbv.webp"
+          src="https://jumpseller.com/images/learn/create-a-blog/blog.jpg"
           alt=""
         />
       </div>
       <div className="flex">
         <img className="m-auto"
-          src="https://res.cloudinary.com/dkc3cgreu/image/upload/v1693298767/electronicStore/brand/apple_wnwzek.webp"
+          src="https://jumpseller.com/images/learn/create-a-blog/blog.jpg"
           alt=""
         />
       </div>
       <div className="flex">
         <img className="m-auto"
-          src="https://res.cloudinary.com/dkc3cgreu/image/upload/v1693298766/electronicStore/brand/vivo_cxslbm.webp"
+          src="https://jumpseller.com/images/learn/create-a-blog/blog.jpg"
           alt=""
         />
       </div>
       <div className="flex">
         <img className="m-auto"
-          src="https://res.cloudinary.com/dkc3cgreu/image/upload/v1693298766/electronicStore/brand/samsung_inoss6.avif"
+          src="https://jumpseller.com/images/learn/create-a-blog/blog.jpg"
           alt=""
         />
       </div>
       <div className="flex">
         <img className="m-auto"
-          src="https://res.cloudinary.com/dkc3cgreu/image/upload/v1693298766/electronicStore/brand/lg_crxfeq.avif"
+          src="https://jumpseller.com/images/learn/create-a-blog/blog.jpg"
           alt=""
         />
       </div>
       <div className="flex">
         <img className="m-auto"
-          src="https://res.cloudinary.com/dkc3cgreu/image/upload/v1693298766/electronicStore/brand/htc_ancxbv.webp"
+          src="https://jumpseller.com/images/learn/create-a-blog/blog.jpg"
           alt=""
         />
       </div>

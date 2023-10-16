@@ -102,12 +102,11 @@ const Cart = ({navigate}) => {
   useEffect(() => {
     fetchAllOrder();
   }, []);
-
   return (
     <div className="flex gap-4">
         <div className="flex-6 ">
           <div className="flex mx-6 xl:mx-8 p-4 items-center gap-4">
-            <input type="checkbox" className="w-4 h-4"/>
+            <input type="checkbox" onChange={() => setChecked(Array.from(10).fill(true))} className="w-4 h-4"/>
             <label className="text-[16px] font-semibold">Chọn tất cả {cart?.length} sản phẩm</label>
           </div>
           <div className="overflow-y-scroll h-[750px]">

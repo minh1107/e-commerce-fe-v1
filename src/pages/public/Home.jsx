@@ -11,6 +11,8 @@ import {
 } from "../../stores/product/asyncAction";
 import HotCollection from "../../components/HotCollection/HotCollection";
 import Donors from "components/Home/Donors";
+import SecureImage from "components/Home/Infomation/SecureImage";
+import HomeInfo from "components/Home/Infomation/HomeInfo";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -23,10 +25,10 @@ const Home = () => {
   return (
     <div className="flex items-center justify-center gap-5 flex-col">
       <div className="xl:w-main md:w-tablet flex gap-5">
-        <div className="w-[25%] flex-auto">
+        {/* <div className="w-[25%] flex-auto">
           <Sidebar />
-        </div>
-        <div className="w-[75%] flex-auto">
+        </div> */}
+        <div className="w-[100%] flex-auto">
           <Banner />
         </div>
       </div>
@@ -40,7 +42,6 @@ const Home = () => {
       </div>
       <div className="flex xl:w-main md:w-tablet gap-5 flex-col">
         <FeatureProduct />
-        <ImageShow />
         <div>
           <h1 className="font-bold mb-5 text-xl py-4 border-b-4 w-full border-b-main">
             NEW ARRIVALS
@@ -61,6 +62,7 @@ const Home = () => {
         <div className="flex mb-10">
         <Donors />
         </div>
+        <SecureImage />
       </div>
     </div>
   );

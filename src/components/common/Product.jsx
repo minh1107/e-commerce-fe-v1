@@ -12,11 +12,11 @@ const Product = ({ productData, isNew, widthImg, isSale, isLast }) => {
 
   return (
     <div
-      className="text-base mx-2 border flex flex-col items-center hover:cursor-pointer"
+      className="text-base mx-2 border flex flex-col items-center hover:cursor-pointer hover:shadow-2xl shadow-md rounded-md "
       onMouseEnter={() => setShowOption(true)}
       onMouseLeave={() => setShowOption(false)}
     >
-      <div className="relative">
+      <div className="relative py-4">
         <img
           src={productData?.thumb}
           className={`${widthImg} -z-10 object-contain`}

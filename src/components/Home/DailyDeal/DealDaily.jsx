@@ -31,10 +31,10 @@ const DealDaily = () => {
     <div className="w-full border h-full flex flex-col gap-3 pb-5 items-center shadow-md">
       <div className="flex my-5 text-xl items-center w-full">
         <span className="flex-2 text-center flex items-center justify-center">
-          <BsStarFill color="red" />
+          <BsStarFill color="blue" />
         </span>
         <span className="flex-6 text-center font-bold text-gray-500 line-clamp-1">
-          DAILY DEALS
+          Daily Seller
         </span>
         <span className="flex-2"></span>
       </div>
@@ -46,9 +46,9 @@ const DealDaily = () => {
       <p>{formatMoney(dailyDeal?.price)} VND</p>
       <div className="w-full flex items-center flex-col">
         <CountDownFather setExpire={setExpire} expire={expire}/>
-        <Link to={`${dailyDeal?.category}/${dailyDeal?._id}/${dailyDeal?.title}`} className="hover:cursor-pointer w-[80%] hover:bg-black transition duration-300 ease-out flex mt-5 justify-center rounded-sm shadow-md items-center gap-2 bg-main text-white py-2">
+        <Link to={`${dailyDeal?.category}/${dailyDeal?._id}/${dailyDeal?.title}`} className="hover:cursor-pointer w-[80%] hover:bg-blue-800 transition duration-300 ease-out flex mt-5 justify-center rounded-sm shadow-md items-center gap-2 bg-main text-white py-2">
           <MdMenu size={20} />
-          <p>OPTIONS</p>
+          <p>See more</p>
         </Link>
       </div>
     </div>

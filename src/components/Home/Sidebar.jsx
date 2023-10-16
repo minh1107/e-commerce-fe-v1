@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 const Sidebar = () => {
   const { productCategory } = useSelector((state) => state.appReducer);
 
-  console.log(productCategory);
   return (
     <div className="flex h-full flex-col border shadow-md">
       <div className="pt-[14px] bg-main mb-5 text-white font-semibold pb-[15px] px-5 text-base">
