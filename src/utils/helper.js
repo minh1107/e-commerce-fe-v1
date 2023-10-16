@@ -1,3 +1,4 @@
+import { createElement } from "react";
 import icons from "../utils/icons";
 
 const {  BsStarHalf, BsStarFill, BsStar } = icons
@@ -25,3 +26,17 @@ export const formatPrice = (price, type, round) => {
     price = Math.round(price / Math.pow(10, round))*Math.pow(10, round)
     return price.toLocaleString('it-IT', {style : 'currency', currency : type});
 }
+
+export const HtmlStringToReact = (htmlString) => {
+  const reactElement = createElement('div', {
+    dangerouslySetInnerHTML: { __html: htmlString },
+  });
+
+  return reactElement;
+};
+
+export function isString(variable) {
+    return typeof variable === 'string';
+  }
+
+

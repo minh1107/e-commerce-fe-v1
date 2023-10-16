@@ -60,3 +60,39 @@ export const apiDeleteUserByAdmin = (data) => (
     params: data
   })
 )
+
+export const apiUpdateInfoUser = (data) => (
+  instance({
+    url: '/user/updatecurrent',
+    method: 'put',
+    data
+  })
+)
+
+export const apiDeleteCart = (pid) => (
+  instance({
+    url: `/user/updateCart/${pid}`,
+    method: 'put'
+  })
+)
+
+export const apiUpdateWishlist = (pid) => (
+  instance({
+    url: `/user/updateWishlist/${pid}`,
+    method: 'put'
+  })
+)
+
+export const apiGetWishList = (id) => (
+  instance({
+    url: '/user/wishlists',
+    method: 'get'
+  })
+)
+
+export const apiDeleteWishList = (pid) => (
+  instance({
+    url: `/user/wishlist/${pid}`,
+    method: 'delete',
+  })
+)

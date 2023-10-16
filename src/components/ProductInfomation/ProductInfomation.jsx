@@ -14,12 +14,14 @@ const activeStyles = "bg-white border border-b-0";
 const notActiveStyles = "border";
 
 // Hàm thông tin sản phầm
-const ProductInfomation = ({pid}) => {
+const ProductInfomation = ({pid, product}) => {
   const [activeTab, setActiveTab] = useState(1);
   const [report, setReport] = useState(null)
   const [infoProduct, setInfoProduct] = useState()
   const dispatch = useDispatch()
+  const detailProduct = [ product?.descriptionDetail,product?.warranty, product?.payment, product?.delivery ]
   const { isLoggedIn }  = useSelector(state => state.userReducer)
+  console.log(report)
   const fetchProduct = async() => {
     const response = await apiGetProduct(pid)
     if(response.status) {
@@ -89,17 +91,21 @@ const ProductInfomation = ({pid}) => {
               <div>
                 {report?.map(item => (
                     <Comment key={item._id}
-                    avatar={item.avatar} 
+                    avatar={item?.votedBy?.avatar} 
                     star={item.star} 
                     updatedAt={item.updatedAt}
                     comment={item.comment}
-                    name={`${item.votedBy.lastname} ${item.votedBy.firstname}`}
+                    firstname={item?.votedBy?.firstname}
+                    lastname={item?.votedBy?.lastname}
+                    // {`${} ${item?.votedBy?.firstname}`}
                     />
                 ))}
               </div>
             </div> 
-            : tabDetailProduct.find((item, index) => index+1 === activeTab)?.content}
-      </ul>
+            : <div>
+              {detailProduct.find((item, index) => index+1 === activeTab)}
+            </div>
+        }</ul>
     </>
   );
 };

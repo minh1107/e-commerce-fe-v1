@@ -6,19 +6,21 @@ module.exports = {
   theme: {
     extend: {
       backgroundColor: {
-        main: '#ee3131',
+        main: '#146290',
       },
       textColor: {
-        main: '#ee3131'
+        main: '#146290'
       },
       width: {
-        main: '1180px'
+        main: '90vw',
+        tablet: '80vw',
+        phone: '100vw'
       },
       fontFamily: {
         poppin: ['Poppins', 'sans-serif']
       },
       borderColor: {
-        main: '#ee3131'
+        main: '#146290'
       },
       flex: {
         '2': '2 2 0',
@@ -51,7 +53,7 @@ module.exports = {
         faded: 'faded .4s ease-in-out forwards',
         zoom: 'zoom 0.4s ease-in-out forwards',
         unZoom: 'unZoom 0.4s ease-in-out forwards',
-        slideTop: 'slide-top 0.4s ease-in-out forwards' 
+        slideTop: 'slide-top 0.2s ease-in-out forwards' 
       },
       keyframes: {
         toRight: {

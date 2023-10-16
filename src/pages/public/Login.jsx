@@ -1,5 +1,5 @@
-import { Box, Button,  Input,  Modal,  TextField } from "@mui/material";
-import React, { useCallback, useEffect, useState } from "react";
+import { Box, Button, TextField } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import background from 'assets/image/loginBackground.webp'
 import { apiLogin, apiRegister, apiForgotpassword } from "apis/user";
 import Swal from "sweetalert2";
@@ -18,7 +18,6 @@ const Login = () => {
   const location = useLocation()
   useEffect(() => {
     if(location?.state == null) {
-      
     } else if(location?.state === 'true') {
       Swal.fire('Đăng ký thành công', location?.state, 'success')
     } else if(location?.state === 'false') {

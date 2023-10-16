@@ -6,7 +6,7 @@ const {
   BiSolidUserPin,
   FaProductHunt,
   IoCreate,
-  BsFillCartCheckFill,
+  BsFillCartCheckFill, MdFavorite, GrPersonalComputer, FaHistory, FaBlog
 } = icons;
 
 export const navigation = [
@@ -14,6 +14,11 @@ export const navigation = [
     id: 5,
     value: "HOME",
     path: `/${paths.HOME}`,
+  },
+  {
+    id: 6,
+    value: "Collection",
+    path: '',
   },
   {
     id: 1,
@@ -32,8 +37,8 @@ export const navigation = [
   },
   {
     id: 1,
-    value: "FAQs",
-    path: `/${paths.FAQ}`,
+    value: "CONTACT US",
+    path: `/${paths.CONTACT_US}`,
   },
 ];
 
@@ -68,4 +73,46 @@ export const pathAdmin = [
     path: `/${paths.ADMIN}/${paths.MANAGER_ORDER}`,
     icon: BsFillCartCheckFill
   },
+  {
+    id: 6,
+    value: "Create blog",
+    path: `/${paths.ADMIN}/${paths.CREATE_BLOG}`,
+    icon: FaBlog
+  },
 ];
+
+
+
+export const pathProfile = [
+  {
+    id: 1,
+    value: "Order",
+    path: `/${paths.MEMBER}/${paths.ORDER}`,
+    icon: BsFillCartCheckFill
+  },
+  {
+    id: 1,
+    value: "Personal",
+    path: `/${paths.MEMBER}/${paths.PERSONAL}`,
+    icon: GrPersonalComputer 
+  },
+  {
+    id: 1,
+    value: "My Cart",
+    path: `/${paths.MEMBER}/${paths.CART}`,
+    icon: BsFillCartCheckFill 
+  },
+  {
+    id: 1,
+    value: "Shopping history",
+    path: `/${paths.MEMBER}/${paths.SHOPPING_HISTORY}`,
+    icon: FaHistory 
+  },
+  {
+    id: 1,
+    value: "Wishlist",
+    path: `/${paths.MEMBER}/${paths.WISHLIST}`,
+    icon: MdFavorite 
+  },
+];
+

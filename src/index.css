@@ -4,20 +4,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,800;1,900&family=Roboto:wght@100;300;400;500&display=swap");
 
 button.slick-next {
-  right: 60px;
+  right: 48px;
 }
 
 button.slick-prev {
-  left: 0px;
+  left: 8px;
   z-index: 20;
 }
 
 button.slick-next::before {
   content: "\276F";
-  color: gray;
-  background-color: #dabbbbc4;
-  width: 80px;
-  height: 80px;
+  color: #888585a2;
+  background-color: #dbd6d6c4;
+  width: 60px;
+  height: 60px;
   font-size: 30px;
   display: flex;
   justify-content: center;
@@ -26,10 +26,10 @@ button.slick-next::before {
 
 button.slick-prev::before {
   content: "\276E";
-  color: gray;
-  background-color: #dabbbbc4;
-  width: 80px;
-  height: 80px;
+  color: #888585a2;
+  background-color: #dbd6d6c4;
+  width: 60px;
+  height: 60px;
   font-size: 30px;
   display: flex;
   justify-content: center;
@@ -56,6 +56,7 @@ button.slick-prev::before {
 
 ::-webkit-scrollbar {
   width: 10px;
+  height: 10px;
 }
 ::-webkit-scrollbar-track {
   background: #f1f1f1;

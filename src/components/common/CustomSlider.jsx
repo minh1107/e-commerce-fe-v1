@@ -2,20 +2,20 @@ import Slider from 'react-slick'
 import React from "react";
 import Product from './Product';
 
-const settings = {
+const CustomSlider = ({productsData, isNew, isSale, widthImg, slidesToShow}) => {
+  const settings = {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: slidesToShow || 3,
     slidesToScroll: 1,
   };
-const CustomSlider = ({productsData, isNew, widthImg}) => {
   return (
     <Slider {...settings}>
       {productsData?.map((item) => (
         <Product
-          isSale={true}
-          key={item._id}
+          isSale={isSale}
+          key={item?._id}
           productData={item}
           isNew={isNew}
           widthImg={widthImg}

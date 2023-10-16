@@ -6,11 +6,17 @@ export const productSlice = createSlice({
     initialState: {
         newArrival: null,
         isLoading: false,
-        bestSeller: null
+        bestSeller: null,
+        productEditInfo: null,
+        isProductEdit: false
     },
     reducers: {
         logout: (state) => {
             state.isLoading = false
+        },
+        setProduct: (state, action) => {
+            state.productEditInfo = action.payload.product
+            state.isProductEdit = action.payload.isProductEdit
         }
     },
     extraReducers: (builder) => {
@@ -38,6 +44,6 @@ export const productSlice = createSlice({
         })
     }
 })
-export const { logout } = productSlice.actions
+export const { logout, setProduct } = productSlice.actions
 
 export default productSlice.reducer

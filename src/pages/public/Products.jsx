@@ -9,10 +9,10 @@ import { sortsOption } from '../../utils/resource';
 import PaginationCustom from '../../components/Pagination/Pagination';
 
 const breakpointColumnsObj = {
-  default: 4,
-  1300: 3,
-  1250: 2,
-  1200: 1
+  default: 5,
+  1300: 4,
+  1250: 4,
+  1200: 2
 };
 const Products = () => {
   const { category } = useParams()
@@ -77,6 +77,7 @@ const Products = () => {
 
   const handleChangeIndex = (e, page) => {
     setPage(page)
+    window.scrollTo(0,0);
   }
 
     useEffect(() => {
@@ -86,15 +87,13 @@ const Products = () => {
       })
   }, [sort, page])
 
-
-  
   return (
     <div className='flex flex-col'>
       <div className='h-20 flex justify-center items-center flex-col bg-[#f7f7f7] w-full'>
-        <h3 className='w-main capitalize text-[18px] font-semibold'>{category}</h3>
+        <h3 className='xl:w-main md:w-tablet capitalize text-[18px] font-semibold'>{category}</h3>
         <BreadCrumb category={category}/>
       </div>
-      <div className='m-auto w-main mt-8'>
+      <div className='m-auto xl:w-main md:w-tablet mt-8'>
         <div className='border p-4 border-gray-300 shadow-md rounded-md flex justify-between'>
           <div>
             <h1 className='font-semibold'>Filter by</h1>
@@ -125,8 +124,8 @@ const Products = () => {
           </Masonry>
         </div>
       </div>
-      <div className='mx-auto w-main flex justify-end mb-10'>
-          <PaginationCustom pageNumbers={totalProducts} onclick={handleChangeIndex}/>
+      <div className='mx-auto xl:w-main md:w-tablet flex justify-end mb-10'>
+          <PaginationCustom recordsNumber={totalProducts} recordPerPage={process.env.REACT_APP_LIMIT_RECORD || 16} onclick={handleChangeIndex} />
       </div>
     </div>
   )
