@@ -18,11 +18,11 @@ const Sidebar = () => {
           to={`/${el.title.toLowerCase()}`}
           className={({ isActive }) =>
             isActive
-              ? "text-main flex-1 bg-main px-5 text-sm"
-              : "hover:text-main flex-1 px-5 text-sm"
+              ? "text-main flex-1 bg-main px-5 text-md"
+              : "hover:text-main flex-1 px-5 text-md"
           }
         >
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-4 items-center">
             <img src={el.image} alt="thumb" className="w-5 h-5 rounded-full" />
             <span>{el.title}</span>
           </div>

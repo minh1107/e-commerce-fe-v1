@@ -32,7 +32,6 @@ function AdminLayout() {
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-  console.log(currentUser)
 
   const handleDrawerClose = () => {
     setOpen(false);

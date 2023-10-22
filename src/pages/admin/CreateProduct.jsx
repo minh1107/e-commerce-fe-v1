@@ -11,12 +11,15 @@ import {
 import { apiCreateProduct } from "apis";
 import Loading from "components/Loading/Loading";
 import MarkDownEditor from "components/common/MarkDownEditor";
+import MultipleSelectChip from "components/common/MultipleSelectChip";
 import React, { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { showModal } from "stores/app/appSlice";
 import Swal from "sweetalert2";
 import icons from "utils/icons";
+import { ramList, colorList, internalList } from "utils/resource";
+import { NumericFormat } from "react-number-format";
 
 const CreateProduct = () => {
   const {
@@ -29,9 +32,6 @@ const CreateProduct = () => {
   const [category, setCategory] = useState();
   const { productCategory } = useSelector((state) => state.appReducer);
   const { isProductEdit } = useSelector(state => state.productReducer)
-  console.log(productCategory?.data);
-  const [payload, setPayload] = useState({ description: "" });
-  const [invalidField, setInvalidField] = useState([]);
   const [selectedThumb, setSelectedThumb] = useState(null);
   const [selectedImages, setSelectedImages] = useState([]);
 
@@ -59,33 +59,41 @@ const CreateProduct = () => {
     // Set value for react-hook-form
     setValue("images", updatedImages);
   };
-  const changeValue = useCallback(
-    (e) => {
-      setPayload(e);
-    },
-    [payload]
-  );
 
   const handleCreateProduct = async (data) => {
-      const req = { ...data, ...payload, ...selectedThumb, ...selectedImages };
+      const req = { ...data, ...selectedThumb, ...selectedImages };
       const formData = new FormData();
       formData.append('title', req.title);
       formData.append('category', req.category);
-      formData.append('price', req.price);
+      formData.append('price', parseInt(req.price));
       formData.append('quantity', req.quantity);
       formData.append('brand', req.brand);
-      formData.append('color', req.color);
-      formData.append('description', req.description);
       formData.append('thumb', req.thumb);
+      formData.append('payment', req.payment);
+      formData.append('delivery', req.delivery);
+      formData.append('warranty', req.warranty);
+      formData.append('descriptionDetail', req.descriptionDetail);
       for (const image of req.images) {
         formData.append('images', image);
       }
+      for(const r of req.ram) {
+        formData.append('ram', r);
+      }
+      for(const i of req.internal) {
+        formData.append('internal', i);
+      }
+      for(const c of req.color) {
+        formData.append('color', c);
+      }
+      for(const d of req.description.split('\n')) {
+        formData.append('description', d);
+      }
+
       dispatch(showModal({isShowModal: true, modalChildren: <Loading />}))
       const res = await apiCreateProduct(formData);
       dispatch(showModal({isShowModal: false, modalChildren: <Loading />}))
       if(res.status) {
         Swal.fire("Tạo thành công", res.createProduct, 'success')
-        setPayload({ description: "" })
         setSelectedImages([])
         setSelectedThumb(null)
         reset()
@@ -124,8 +132,8 @@ const CreateProduct = () => {
               {...register("quantity", { required: true, maxLength: 100 })}
             />
           </Box>
-          <Box className="flex gap-4">
-            <FormControl variant="outlined" fullWidth margin="normal">
+          <Box className="flex gap-4 items-start">
+            <FormControl variant="outlined" fullWidth >
               <InputLabel>Category</InputLabel>
               <Select
                 {...register("category")}
@@ -138,7 +146,7 @@ const CreateProduct = () => {
                 ))}
               </Select>
             </FormControl>
-            <FormControl variant="outlined" fullWidth margin="normal">
+            <FormControl variant="outlined" fullWidth >
               <InputLabel>Brand</InputLabel>
               <Select {...register("brand")} label="Brand">
                 {productCategory?.data
@@ -148,32 +156,21 @@ const CreateProduct = () => {
                   ))}
               </Select>
             </FormControl>
-            <FormControl variant="outlined" fullWidth margin="normal">
-              <InputLabel>Color</InputLabel>
-              <Select {...register("color")} label="Color">
-                <MenuItem value="yellow">Yellow</MenuItem>
-                <MenuItem value="blue">Blue</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl variant="outlined" fullWidth margin="normal">
-              <InputLabel>Color</InputLabel>
-              <Select {...register("color")} label="Color">
-                <MenuItem value="yellow">Yellow</MenuItem>
-                <MenuItem value="blue">Blue</MenuItem>
-              </Select>
-            </FormControl>
+            <MultipleSelectChip register={register} names={ramList} type="ram"/>
+            <MultipleSelectChip register={register} names={colorList} type="color"/>
+            <MultipleSelectChip register={register} names={internalList} type="internal"/>
           </Box>
           <Box>
-            <MarkDownEditor
-              name={"description"}
-              changeValue={changeValue}
-              label={"Description"}
-              invalidField={invalidField}
-              setInvalidField={setInvalidField}
-            />
-            {payload.description && (
-              <Typography>Require description</Typography>
-            )}
+              <TextField fullWidth
+                id="filled-multiline-flexible"
+                label="Description (Nội dung viết cách nhau bởi dấu xuống dòng)"
+                multiline
+                maxRows={6}
+                required
+                rows={6}
+                variant="filled"
+                  {...register("description")}
+              />
           </Box>
           <div className="flex">
             <div className="flex flex-col">
@@ -214,11 +211,12 @@ const CreateProduct = () => {
                 multiple
                 ref={register("images", { required: true })}
               />
+              <div className="overflow-x-scroll w-[60vw]">
               {selectedImages.length > 0 && (
                 <div className="flex flex-col ">
                   <Typography variant="subtitle1">Selected Images:</Typography>
                 <div className="w-full">
-                <ul className="flex gap-2 overflow-scroll w-full items-center">
+                <ul className="flex gap-2 w-full items-center">
                     {selectedImages.map((file, index) => (
                       <li key={index}>
                         <div>
@@ -240,8 +238,55 @@ const CreateProduct = () => {
                 </div>
                 </div>
               )}
+              </div>
             </div>
           </div>
+          <div className="w-full flex flex-col gap-[5%]">
+            <div className="w-full flex mb-[2%] gap-[2.5%]">
+              <TextField fullWidth
+                  id="filled-multiline-flexible"
+                  label="Description Detail (Nội dung viết cách nhau bởi dấu xuống dòng)"
+                  multiline
+                  maxRows={6}
+                  required
+                  rows={6}
+                  variant="filled"
+                    {...register("descriptionDetail")}
+                />
+              <TextField fullWidth
+                  id="filled-multiline-flexible"
+                  label="Warranty (Nội dung viết cách nhau bởi dấu xuống dòng)"
+                  multiline
+                  maxRows={6}
+                  required
+                  rows={6}
+                  variant="filled"
+                    {...register("warranty")}
+                />
+            </div>
+            <div className="w-full flex gap-[2.5%]"> 
+            <TextField fullWidth
+                id="filled-multiline-flexible"
+                label="Delivery (Nội dung viết cách nhau bởi dấu xuống dòng)"
+                multiline
+                maxRows={6}
+                required
+                rows={6}
+                variant="filled"
+                  {...register("delivery")}
+              />
+            <TextField fullWidth
+                id="filled-multiline-flexible"
+                label="Payment (Nội dung viết cách nhau bởi dấu xuống dòng)"
+                multiline
+                maxRows={6}
+                required
+                rows={6}
+                variant="filled"
+                  {...register("payment")}
+              />
+            </div>
+            </div>
           <Box>
             <Button size="large" variant="contained" type="submit">
               Add product

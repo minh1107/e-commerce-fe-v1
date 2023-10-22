@@ -25,9 +25,9 @@ const Home = () => {
   return (
     <div className="flex items-center justify-center gap-5 flex-col">
       <div className="xl:w-main md:w-tablet flex gap-5">
-        {/* <div className="w-[25%] flex-auto">
+        <div className="w-[25%] flex-auto">
           <Sidebar />
-        </div> */}
+        </div>
         <div className="w-[100%] flex-auto">
           <Banner />
         </div>

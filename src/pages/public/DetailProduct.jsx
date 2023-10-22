@@ -105,7 +105,8 @@ const DetailProduct = () => {
             <Slider {...settings}>
               {product?.images?.map((el, index) => (
                 <div className='px-2'>
-                  <img onClick={() => setImgSetted(index)} src={el} alt="detail product" className='hover:cursor-pointer m-auto w-[143px] h-[143px] border object-contain'/>
+                  <img onClick={() => setImgSetted(index)} src={el} alt="detail product" 
+                  lassName='hover:cursor-pointer m-auto w-[143px] h-[143px] border object-cover'/>
                 </div>
                 ))}
             </Slider>
@@ -123,9 +124,9 @@ const DetailProduct = () => {
                     {ratingStar(product?.totalRating, 14)} 
                     <p className='mt-[1px]'>{product?.totalRating} reviews</p>
                 </div>
-                <ul className='text-[14px]'>
+                <ul className='text-[14px] mb-6'>
                   {product?.description?.length > 1 ? product?.description?.map(item => (
-                    <li key={item} className='flex items-center mb-[5px] h-5 gap-2 text-[#505050]'><BsSquareFill size={4}/> {item}</li>
+                    <li key={item} className='flex items-center mb-[5px] h-5 gap-2 text-[#505050]'><BsSquareFill size={4}/> <p className='self-start'>{item}</p></li>
                   )) : HtmlStringToReact(product?.description)}
                 </ul>
                 <Box className="flex flex-col gap-2.5 mb-2.5">

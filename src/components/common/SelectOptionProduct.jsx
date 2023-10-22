@@ -7,7 +7,7 @@ const SelectOptionProduct = ({ title, type, onclick }) => {
     onclick(title, item)
     setSelected(index)
   }
-  
+  console.log(type)
   return (
     <div className="flex gap-2 items-center">
       <h3 className="font-semibold">{title}: </h3>

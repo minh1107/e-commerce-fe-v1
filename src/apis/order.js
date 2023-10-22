@@ -11,3 +11,21 @@ export const apiCurrentOrder = () => instance({
     method: 'get'
 })
 
+export const apiListOrder = (sort) => instance({
+    url: '/order/allorder',
+    method: 'get',
+    params: sort
+})
+
+export const apiUpdateStatus = ({oid, data}) => {
+    instance({
+        url: `/order/${oid}`,
+        method: 'put',
+        data: {status: data}
+    })
+}
+
+export const apiDeleteOrder = (oid) => instance({
+    url: `/order/${oid}`,
+    method: 'delete'
+})

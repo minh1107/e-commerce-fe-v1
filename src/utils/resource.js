@@ -157,3 +157,14 @@ export const voteOptionsExpression = [
   },
 ]
 
+export const ramList = [
+  '2GB', '3GB', '4GB'
+] 
+
+export const colorList = [
+  'BLACK', 'WHITE', 'YELLOW', 'BLUE', 'RED', 'PINK'
+]
+
+export const internalList = [
+  '32GB', '64GB', '128GB'
+]

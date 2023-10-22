@@ -10,12 +10,13 @@ import PaginationCustom from '../../components/Pagination/Pagination';
 
 const breakpointColumnsObj = {
   default: 5,
-  1300: 4,
-  1250: 4,
+  1500: 4,
+  1250: 3,
   1200: 2
 };
 const Products = () => {
   const { category } = useParams()
+  console.log(category)
   const [product, setProduct] = useState()
   const [totalProducts, setTotalProducts] = useState()
   const [page, setPage] = useState(1)
@@ -85,25 +86,25 @@ const Products = () => {
           pathname: `/${category}`,
           search: createSearchParams({sort}).toString() + "&" + createSearchParams({page}).toString()
       })
-  }, [sort, page])
+  }, [sort, page, category])
 
   return (
     <div className='flex flex-col'>
       <div className='h-20 flex justify-center items-center flex-col bg-[#f7f7f7] w-full'>
-        <h3 className='xl:w-main md:w-tablet capitalize text-[18px] font-semibold'>{category}</h3>
+        <h3 className='xl:w-main md:w-tablet capitalize text-[18px] font-semibold'>{category === ':category' ? 'Product' : category}</h3>
         <BreadCrumb category={category}/>
       </div>
-      <div className='m-auto xl:w-main md:w-tablet mt-8'>
-        <div className='border p-4 border-gray-300 shadow-md rounded-md flex justify-between'>
+      <div className='m-auto xl:w-main md:w-tablet mt-8 flex gap-4'>
+        <div className='border p-4 border-gray-300 shadow-md rounded-md flex flex-col w-[350px]'>
           <div>
-            <h1 className='font-semibold'>Filter by</h1>
+            <h1 className='font-semibold'>Filter</h1>
             <div className='flex gap-3'>
               <SearchItem name={'Price'} activeClick={activeClick} changeActiveFilter={changeActiveFilter} type='input' />
-              <SearchItem name={'Color'} activeClick={activeClick} changeActiveFilter={changeActiveFilter} type='checkbox'/>
+              {/* <SearchItem name={'Color'} activeClick={activeClick} changeActiveFilter={changeActiveFilter} type='checkbox'/> */}
             </div>
           </div>
           <div>
-          <h1 className='font-semibold'>Sort by</h1>
+          <h1 className='font-semibold my-4'>Sort by</h1>
           <div className='flex'>
             <InputSelect value={sort} changeValue={changeValue} options={sortsOption}/>
           </div>

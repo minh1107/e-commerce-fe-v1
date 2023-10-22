@@ -64,7 +64,7 @@ const BestSeller = () => {
         ))}
       </div>
       <div className="mt-4 flex-1 mb-[15px]">
-        <CustomSlider
+        <CustomSlider slidesToShow={4}
           productsData={productShowed}
           isNew={activeTab === 1 ? true : false}
           widthImg={"w-[243px]"}

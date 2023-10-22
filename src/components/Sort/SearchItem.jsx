@@ -66,13 +66,11 @@ const SearchItem = ({name, activeClick, changeActiveFilter, type='checkbox'}) =>
     }, [price])
     
   return (
-    <div onClick={() => changeActiveFilter(name)} className='relative py-2 px-4 rounded-md  border-gray-200 border flex justify-center items-center shadow-md hover:border-gray-400 hover:cursor-pointer'>
-        <span className='capitalize'>{name}</span>
-        <AiOutlineCaretDown />
-        {activeClick == name && <div onClick={e => e.stopPropagation()} className='absolute rounded-md shadow-md border border-gray-300 top-[calc(100%+1px)] left-0 w-fit p-4 z-30 bg-white'>
-            {type == 'checkbox' && 
-                <div className=''>
-                    <div className='items-center flex justify-between  min-w-[150px]'>
+    <div onClick={() => changeActiveFilter(name)} 
+        className=' py-2 rounded-md flex
+        hover:border-gray-400 hover:cursor-pointer flex-col'>
+               <div className=''>
+                    <div className='flex justify-between'>
                         <span className='whitespace-nowrap'>{`${selected.length} selected`}</span>
                         <span className='underline hover:text-main' 
                         onClick={(e) => {
@@ -93,43 +91,41 @@ const SearchItem = ({name, activeClick, changeActiveFilter, type='checkbox'}) =>
                             ))
                         }
                     </div>
+                </div> 
+            <div onClick={(e) => e.stopPropagation()} className=''>
+                <div className='flex flex-col min-w-[150px] mt-4'>
+                    {/* <span className='mt-4'>
+                        The highest price is {formatPrice(bestPrice, 'VND')}. Default input value is VND
+                    </span> */}
                 </div>
-            } 
-            {type == 'input' && 
-            <div onClick={(e) => e.stopPropagation()} className='w-[400px]'>
-                <div className='items-center flex mb-5 justify-between min-w-[150px]'>
-                    <span className='w-[300px]'>
-                        The highest price is {formatPrice(bestPrice, 'VND')}. Default input value is USD
-                    </span>
-                    <span className='underline hover:text-main' 
-                    onClick={(e) => {
-                        e.stopPropagation()
-                        setPrice({})
-                        changeActiveFilter(null)}}>
-                            Reset
-                    </span>
-                </div>
-                <div className='flex justify-between w-full'>
-                        <div className='flex items-center gap-2'>
-                            <label htmlFor="from">From</label>
+                <div className='flex flex-col justify-between gap-4 w-full'>
+                        <div className='flex flex-col gap-2'>
+                            <div className='flex justify-between'>
+                                <label className='font-bold' title={`The highest price is ${formatPrice(bestPrice, 'VND')}. Default input value is VND`} htmlFor="from">From</label>
+                                <span className='underline hover:text-main' 
+                                onClick={(e) => {
+                                    e.stopPropagation()
+                                    setPrice({from: 0, to: 0})
+                                    changeActiveFilter(null)}}>
+                                        Reset
+                                </span>
+                            </div>
                             <input
                             value={price.from}
                             onChange={(e) => setPrice(pre => ({...pre, from: e.target.value}))} 
-                            className='form-input outline-none px-4 py-2 border border-gray-700 w-[120px]' 
+                            className='form-input outline-none px-4 py-2  border border-gray-700' 
                             type="number" id='from'/>
                         </div>
-                        <div className='flex items-center gap-2'>
-                            <label htmlFor="to">To</label>
+                        <div className='flex flex-col gap-2'>
+                            <label className='font-bold' htmlFor="to">To</label>
                             <input
                             value={price.to}
                             onChange={(e) => setPrice(pre => ({...pre, to: e.target.value}))} 
-                            className='form-input outline-none px-4 py-2 border border-gray-700 w-[120px]' type="number" id='to'/>
+                            className='form-input outline-none px-4 py-2 border border-gray-700' type="number" id='to'/>
                         </div>
                 </div>
                 {alertPrice && <p className='text-main'>Không được để from lớn hơn to</p>}
             </div>
-            } 
-        </div>}
     </div>
   )
 }
