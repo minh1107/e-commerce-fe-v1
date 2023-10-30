@@ -96,3 +96,14 @@ export const apiDeleteWishList = (pid) => (
     method: 'delete',
   })
 )
+
+export const apiListShoppingHistory = () => instance({
+  url: '/user/getListShoppingHistory',
+  method: 'get'
+})
+
+export const apiUpdateHistoryShopping = (data) => instance({
+  url: '/user/updateStatusHistory',
+  method: 'put',
+  data
+})

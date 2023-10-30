@@ -54,7 +54,12 @@ const Login = () => {
               Swal.fire("Đăng nhập thành công", res.message, 'success').then(() => {
               navigate(`/${paths.HOME}`)
           })          
-        }} catch (error) {
+        } else {
+          Swal.fire('Đăng nhập thất bại', 'loi', 'error')
+        }
+        
+      } catch (error) {
+          console.log('hello')
           Swal.fire('Đăng nhập thất bại', 'loi', 'error')
         }
       }

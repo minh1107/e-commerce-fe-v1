@@ -10,18 +10,31 @@ import icons from "utils/icons";
 
 const { AiFillHeart, ImBin, FaLocationArrow } = icons
 const Cart = ({navigate}) => {
+  const [mobile, setMobile] = useState()
+  const [receiver, setReceiver] = useState()
   const [quantityNumber, setQuantityNumber] = useState()
+  const [address, setAddress] = useState()
   const [cart, setCart] = useState([]);
   const [checked, setChecked] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0)
   const [isAddWishList, setIsAddWishList] = useState([])
+  const [isAblePaypal, setIsAblePaypal ] = useState(false)
+  // Thông tin thanh toán online
+  const [paymentExpression, setPaymentExpression] = useState('')
 
+  const resetState = () => {
+    setChecked([])
+    setPaymentExpression(null)
+  }
+  console.log(checked)
+  console.log(paymentExpression)
   const fetchAllOrder = async () => {
     const res = await apiCurrentCart();
     setCart(res?.data?.cart);
   };
   const { currentUser } = useSelector(state => state.userReducer)
 
+  
   const handleSelectProduct = (event, index, product) => {
     var updatedList = [...checked];
     if (event.target.checked) {
@@ -55,7 +68,7 @@ const Cart = ({navigate}) => {
     }
   }, [checked, quantityNumber])
   
-  
+  console.log(paymentExpression)
   useEffect(() => {
     // Initialize quantityNumber with the initial quantity values from the cart
     const initialQuantities = cart?.map(item => item?.count || 1);
@@ -80,6 +93,12 @@ const Cart = ({navigate}) => {
     }
   }
 
+  useEffect(() => {
+    if(paymentExpression?.status === 'COMPLETED') {
+      handleOrder()
+    }
+  }, [paymentExpression])
+
   const handleToggleWishlist = async (pid, index) => {
       const res = await apiUpdateWishlist(pid)
       let wishlist = isAddWishList
@@ -88,22 +107,44 @@ const Cart = ({navigate}) => {
       } else  wishlist[index] = false
       setIsAddWishList(wishlist)
   }
+
+  useEffect(() => {
+    if(address && receiver && mobile && checked.length > 0) {
+      setIsAblePaypal(false)
+    } else {
+      setIsAblePaypal(true)
+    }
+  }, [address, receiver, mobile, checked])
+  
   const handleOrder = async() => {
     let filterCart = cart.filter((item, index) => checked.includes(index.toString()))
-    const finalCart = filterCart?.map(item => ({
-        color: item.color,
-        quantity: item.count,
-        internal: item.internal,
-        ram: item.ram,
-        price: item.price,
-        pid: item.product._id,
-    }))
-
-    const res = await apiCreateAndUpdateOrder(finalCart)
-    if(res.status) {
-      Swal.fire('Hãy kiểm tra đơn hàng của bạn', res.notification, 'success').then(() => {
-        navigate('/')
-      })
+    console.log(filterCart)
+    if(!address || !receiver || !mobile || !filterCart.length) {
+      Swal.fire('Hãy kiểm tra đầy đủ thông tin thanh toán', 'Lỗi', 'warning')
+    } else {
+        const finalCart = filterCart?.map(item => ({
+          id: item._id,
+          color: item.color,
+          quantity: item.count,
+          internal: item.internal,
+          ram: item.ram,
+          price: item.price,
+          pid: item.product._id,
+          thumb: item.product.thumb,
+          title: item.product.title
+      }))
+      try {
+        let res = null
+        res = await apiCreateAndUpdateOrder({finalCart: finalCart, address, receiver, mobile, paymentExpression})
+        if(res.status) {
+          Swal.fire('Hãy kiểm tra đơn hàng của bạn', res.notification, 'success')
+          resetState()
+        } else {
+          Swal.fire('Không chọn đơn hàng nào', res.notification, 'error')
+        }
+      } catch (error) {
+        Swal.fire('Hãy kiểm tra đơn hàng của bạn', error.message, 'error')
+      }
     }
   }
 
@@ -121,7 +162,8 @@ const Cart = ({navigate}) => {
             {cart?.map((item, index) => (
               <div key={item} className="flex items-center bg-gray-100 rounded-xl m-6 p-4">
                 <div className="flex items-center flex-5 gap-4">
-                  <input type="checkbox" checked={checked.find(i => i === index.toString()) ? true : false} value={index} onChange={(e) => handleSelectProduct(e,index, item)} className="h-4 w-4"/>
+                  <input type="checkbox" checked={checked.find(i => i === index.toString()) ? true : false} value={index} 
+                  onChange={(e) => handleSelectProduct(e,index, item)} className="h-4 w-4"/>
                   <img src={item?.product?.thumb} alt="" className="rounded-xl w-20 h-20 object-contain"/>
                   <p>{item?.product?.title}</p>
                 </div>
@@ -142,14 +184,18 @@ const Cart = ({navigate}) => {
             ))}
           </div>
         </div>
-        <div className="xl:flex-2 flex-4 bg-gray-100 pb-10 p-4 rounded-md">
-          <div className="flex gap-1 mt-4 items-center">
-            <FaLocationArrow />
-            <textarea className="w-full h-[120px] p-3 rounded-md" type="text" defaultValue={currentUser?.data?.address[0]}/>
+        <div className="xl:flex-2 flex-4 bg-gray-100 pb-10 p-4 overflow-scroll h-[88vh] rounded-md">
+          <div className="flex flex-col gap-4">
+            <div className="flex gap-1 mt-4 items-center relative">
+              <FaLocationArrow className="absolute bottom-1/2 translate-y-1/2 left-[4px]"/>
+              <textarea onChange={(e) => setAddress(e.target.value)} value={address} className="w-full h-[120px] px-6 py-2 rounded-md" type="text" placeholder="Address shipping" defaultValue={currentUser?.data?.address[0]}/>
+            </div>
+            <TextField variant="outlined" label={'Receiver'} className="bg-white w-full" value={receiver} onChange={(e) => setReceiver(e.target.value)} required/>
+            <TextField variant="outlined" label={'Mobile'} className="bg-white w-full" value={mobile} onChange={(e) => setMobile(e.target.value)} required/>
           </div>
           <br />
           <div className="flex mt-4 flex-col gap-4">
-            <p>Thông tin đơn hàng</p>
+            <b>Thông tin đơn hàng</b>
             <p>Phí tạm tính: {formatPrice(totalPrice, 'VND', 4)}</p>
             <p>Phí giao hàng: {formatPrice(20000, 'VND', 4)}</p>
             <p>Hình thức thanh toán</p>
@@ -161,7 +207,8 @@ const Cart = ({navigate}) => {
           <div className="flex flex-col gap-4">
             <p>Tổng cộng: {formatPrice(totalPrice + 20000, 'VND', 4)} VND</p>
             <Button onClick={handleOrder} variant="contained" size="large" color="error" fullWidth>Thanh toán khi nhận hàng</Button>
-            <Paypal amount={totalPrice}/>
+            <Paypal amount={totalPrice} isAblePaypal={isAblePaypal} setPaymentExpression={setPaymentExpression}/>
+            <p className="text-blue-500">Nhập đủ thông tin để thanh toán!</p>
           </div>
         </div>
     </div>

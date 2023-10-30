@@ -2,7 +2,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Button, ButtonGroup, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material'
 import IconButton from '@mui/material/IconButton';
-import { apiDeleteOrder, apiListOrder, apiUpdateStatus } from 'apis'
+import { apiDeleteOrder, apiListOrder, apiUpdateHistoryShopping, apiUpdateStatus } from 'apis'
 import PaginationCustom from 'components/Pagination/Pagination'
 import moment from 'moment'
 import Select from '@mui/material/Select';
@@ -16,6 +16,7 @@ import Typography from '@mui/material/Typography';
 import Collapse from '@mui/material/Collapse';
 import Box from '@mui/material/Box';
 const tableHead = ['Index','Name','Email', 'Phone', "Status", 'Total Money', 'Created At', 'Coupon', 'Action']
+
 const ManagerOrder = () => {
   const [orderList, setOrderList] = useState([])
   const [orderTotal, setOrderTotal] = useState()
@@ -25,9 +26,10 @@ const ManagerOrder = () => {
     setPages(page)
     fetchOrderList({page})
   }
+
+  const statusList = ['Canceled', 'Processing', 'Shipping', 'Succeeded']
   const fetchOrderList = async(queries) => {
     try {
-      console.log(searchInput)
       const res = await apiListOrder({limit: 8, ...queries, search: searchInput})
       setOrderList(res.order)
       setOrderTotal(res.totalOrder)
@@ -35,9 +37,11 @@ const ManagerOrder = () => {
       Swal.fire('Lỗi gì đó', error.message, 'error')
     } 
   }
+  
   useEffect(() => {
-    fetchOrderList()
+  fetchOrderList()
   }, [])
+
   const handleSearchSubmit = (e) => {
     setSearchInput(e.target.value)
   }
@@ -53,6 +57,7 @@ const ManagerOrder = () => {
         <Table>
           <TableHead>
             <TableRow>
+              <TableCell></TableCell>
               {tableHead.map(item =>
                 <TableCell>{item}</TableCell>
               )}
@@ -61,7 +66,7 @@ const ManagerOrder = () => {
           <TableBody>
             {
               orderList.map((item, index) => (
-                <Row item={item} pages={pages} index={index} fetchOrderList={fetchOrderList}/>
+                <Row item={item} pages={pages} status={item.status} key={index} index={index} statusList={statusList} fetchOrderList={fetchOrderList}/>
               ))
             }
           </TableBody>
@@ -76,10 +81,10 @@ const ManagerOrder = () => {
 
 export default ManagerOrder
 
-const Row = ({item, pages, index, fetchOrderList}) => {
+const Row = ({item, pages, index, fetchOrderList, status, statusList}) => {
   const [open, setOpen] = useState(false);
   const [activeSave, setActiveSave] = useState(false)
-  const [process, setProcess] = useState(item.status);
+  const [process, setProcess] = useState();
 
   const handleChangeProcess = async(event) => {
     setProcess(event.target.value);
@@ -88,16 +93,21 @@ const Row = ({item, pages, index, fetchOrderList}) => {
 
   useEffect(() => {
     setActiveSave(false)
-    setProcess(item.status)
   }, [pages])
   
   const handleSave = async() => {
     try {
       const res = await apiUpdateStatus({oid: item._id, data: process})
-      Swal.fire('Thành công', 'Update thành công', 'success')
-      setActiveSave(false)
+      const res1 = await apiUpdateHistoryShopping({oid: item._id, status: process})
+      if(res && res1) {
+        Swal.fire('Thành công', 'Update thành công', 'success')
+        setActiveSave(false)  
+      }
+      else {
+        Swal.fire('Lỗi', 'Lỗi', 'error')
+      }
     } catch (error) {
-      Swal.fire('loi', 'loi', 'error')
+      Swal.fire('Lỗi', 'Lỗi', 'error')
     }
   }
   const handleDelete = async() => {
@@ -106,9 +116,10 @@ const Row = ({item, pages, index, fetchOrderList}) => {
         Swal.fire('Thành công', 'Delete thành công', 'success')
         fetchOrderList()
       } catch (error) {
-        Swal.fire('loi', 'loi', 'error')
+        Swal.fire('Lỗi', 'Lỗi', 'error')
       }
   }
+  
   return (
     <>
     <TableRow>
@@ -125,7 +136,7 @@ const Row = ({item, pages, index, fetchOrderList}) => {
        <TableCell>{item.orderBy.email}</TableCell>
        <TableCell>{item.orderBy.mobile}</TableCell>
        <TableCell>
-       <Select
+       <Select defaultValue={status}
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           label="Status"
@@ -133,9 +144,11 @@ const Row = ({item, pages, index, fetchOrderList}) => {
           value={process}
           onChange={handleChangeProcess}
         >
-          <MenuItem value={'Canceled'}>Canceled</MenuItem>
-          <MenuItem value={'Processing'}>Processing</MenuItem>
-          <MenuItem value={'Succeeded'}>Succeeded</MenuItem>
+          {
+            statusList.map((item, index) => (
+              <MenuItem key={index} value={item}>{item}</MenuItem>
+            ))
+          }
         </Select>
        </TableCell>
        <TableCell>{formatMoney(item.total)} VND</TableCell>
@@ -171,7 +184,9 @@ const Row = ({item, pages, index, fetchOrderList}) => {
                 <TableRow key={el.title}>
                   <TableCell align="right">{el?.title}</TableCell>
                   <TableCell>{el.count}</TableCell>
-                  <TableCell align="right">{el?.thumb}</TableCell>
+                  <TableCell align="right">
+                    <img src={el?.thumb} alt="" width={50} height={50}/>
+                  </TableCell>
                   <TableCell component="th" scope="row">{el.color}</TableCell>
                   <TableCell align="right">{formatMoney(el?.price)} VND</TableCell>
                   <TableCell align="right">{el?.ram}</TableCell>

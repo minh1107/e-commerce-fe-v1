@@ -9,7 +9,7 @@ import logo  from 'assets/image/pngwing.com.png'
 
 const Header = () => {
   const { RiPhoneFill, MdEmail, BsHandbagFill, FaUserCircle } = icons;
-  const { currentUser } = useSelector((state) => state.userReducer);
+  const { currentUser, isLoggedIn } = useSelector((state) => state.userReducer);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const dispatch = useDispatch();
@@ -20,7 +20,6 @@ const Header = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  console.log(currentUser)
   return (
     <div className="flex justify-between xl:w-main md:w-tablet h-[110px] items-center">
       <Link to={paths.HOME}>
@@ -33,26 +32,26 @@ const Header = () => {
       <div className="flex text-[13px]">
         <div className="xl:flex hidden flex-col items-center px-4 border-r">
           <span className="flex gap-4 items-center">
-            <RiPhoneFill color="red" />
+            <RiPhoneFill color="#146290" />
             <span className="font-semibold">032 9933 496</span>
           </span>
           <span>Mon-Sat 9:00AM - 8:00PM</span>
         </div>
         <div className="xl:flex hidden flex-col items-center px-4 border-r">
           <span className="flex gap-4 items-center">
-            <MdEmail color="red" />
+            <MdEmail color="#146290" />
             <span className="font-semibold">minhnqdeveloper.gmail.com</span>
           </span>
           <span>Online Support 24/7</span>
         </div>
         <Link to={`/${paths.MEMBER}/${paths.CART}`} className="flex items-center justify-center gap-2 px-4 border-r">
-          <BsHandbagFill color="red" />
+          <BsHandbagFill color="#146290" />
           <span>{currentUser?.data?.cart?.length} Item(s)</span>
         </Link>
         <div>
-          <Button
+        {(isLoggedIn && currentUser) ? <Button
             startIcon={<FaUserCircle size={24} />}
-            color="error"
+            color="info"
             className="flex items-center gap-2 hover:cursor-pointer justify-center px-4"
             id="basic-button"
             aria-controls={open ? "basic-menu" : undefined}
@@ -61,7 +60,7 @@ const Header = () => {
             onClick={handleClick}
           >
             Profile
-          </Button>
+          </Button> : <Button><Link className='hover:text-gray-800' to={paths.LOGIN}>Sign In</Link></Button> }
           <Menu
             id="basic-menu"
             anchorEl={anchorEl}

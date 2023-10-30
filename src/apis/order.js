@@ -18,7 +18,7 @@ export const apiListOrder = (sort) => instance({
 })
 
 export const apiUpdateStatus = ({oid, data}) => {
-    instance({
+    return instance({
         url: `/order/${oid}`,
         method: 'put',
         data: {status: data}
