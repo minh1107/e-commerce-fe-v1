@@ -1,13 +1,13 @@
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { Button, ButtonGroup, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material'
+import { Button, ButtonGroup, Menu, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material'
 import IconButton from '@mui/material/IconButton';
 import { apiDeleteOrder, apiListOrder, apiUpdateHistoryShopping, apiUpdateStatus } from 'apis'
 import PaginationCustom from 'components/Pagination/Pagination'
 import moment from 'moment'
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import React from 'react'
+import React, { useRef } from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import Swal from 'sweetalert2'
@@ -15,32 +15,44 @@ import { formatMoney } from 'utils/helper'
 import Typography from '@mui/material/Typography';
 import Collapse from '@mui/material/Collapse';
 import Box from '@mui/material/Box';
-const tableHead = ['Index','Name','Email', 'Phone', "Status", 'Total Money', 'Created At', 'Coupon', 'Action']
+const tableHead = ['Index','Name','Email', 'Phone', "Status", 'Total Money', 'Created At', 'Pay', 'Action']
 
 const ManagerOrder = () => {
   const [orderList, setOrderList] = useState([])
   const [orderTotal, setOrderTotal] = useState()
   const [pages, setPages] = useState(1)
   const [searchInput, setSearchInput] = useState('')
+  const [statusList, setStatusList] = useState([])
+  const [filterStatus, setFilterStatus] = useState('Processing')
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = (item) => {
+    setAnchorEl(null);
+    setFilterStatus(item)
+  };
   const handleChangeIndex = (e, page) => {
     setPages(page)
     fetchOrderList({page})
   }
 
-  const statusList = ['Canceled', 'Processing', 'Shipping', 'Succeeded']
   const fetchOrderList = async(queries) => {
     try {
-      const res = await apiListOrder({limit: 8, ...queries, search: searchInput})
+      const res = await apiListOrder({limit: 8, ...queries, search: searchInput, statusEnum: filterStatus})
+      setOrderList([])
       setOrderList(res.order)
       setOrderTotal(res.totalOrder)
+      setStatusList(res.enumStatus)
     } catch (error) {
       Swal.fire('Lỗi gì đó', error.message, 'error')
     } 
   }
   
   useEffect(() => {
-  fetchOrderList()
-  }, [])
+    fetchOrderList()
+  }, [filterStatus])
 
   const handleSearchSubmit = (e) => {
     setSearchInput(e.target.value)
@@ -50,6 +62,23 @@ const ManagerOrder = () => {
     <div className=''>
       <h1 className='py-2 text-3xl font-semibold'>Manage Order</h1>
       <div className='flex gap-2 justify-end items-center w-full'>
+      <Button size='small'
+        onClick={handleClick}>
+        {filterStatus}
+        </Button>
+          <Menu 
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={open}
+          
+          MenuListProps={{
+            'aria-labelledby': 'basic-button',
+          }}>
+            {
+              statusList.map((item, index) => (
+                <MenuItem  onClick={() => handleClose(item)} key={index} value={item}>{item}</MenuItem>))
+            }
+          </Menu>
             <TextField className='w-[30%]' size='small' label="Search products" value={searchInput}  onChange={handleSearchSubmit}/>
             <Button onClick={fetchOrderList} variant='contained'>Search</Button>
       </div>
@@ -60,7 +89,7 @@ const ManagerOrder = () => {
               <TableCell></TableCell>
               {tableHead.map(item =>
                 <TableCell>{item}</TableCell>
-              )}
+                )}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -84,8 +113,7 @@ export default ManagerOrder
 const Row = ({item, pages, index, fetchOrderList, status, statusList}) => {
   const [open, setOpen] = useState(false);
   const [activeSave, setActiveSave] = useState(false)
-  const [process, setProcess] = useState();
-
+  const [process, setProcess] = useState(null);
   const handleChangeProcess = async(event) => {
     setProcess(event.target.value);
     setActiveSave(true)
@@ -96,9 +124,11 @@ const Row = ({item, pages, index, fetchOrderList, status, statusList}) => {
   }, [pages])
   
   const handleSave = async() => {
+    let isPaid = false
     try {
-      const res = await apiUpdateStatus({oid: item._id, data: process})
-      const res1 = await apiUpdateHistoryShopping({oid: item._id, status: process})
+      if(process == 'Succeeded') {isPaid = true}
+      const res = await apiUpdateStatus({oid: item._id, data: {status: process, isPaid: isPaid}})
+      const res1 = await apiUpdateHistoryShopping({oid: item._id,uid: item.orderBy, status: process})
       if(res && res1) {
         Swal.fire('Thành công', 'Update thành công', 'success')
         setActiveSave(false)  
@@ -119,7 +149,6 @@ const Row = ({item, pages, index, fetchOrderList, status, statusList}) => {
         Swal.fire('Lỗi', 'Lỗi', 'error')
       }
   }
-  
   return (
     <>
     <TableRow>
@@ -136,23 +165,24 @@ const Row = ({item, pages, index, fetchOrderList, status, statusList}) => {
        <TableCell>{item.orderBy.email}</TableCell>
        <TableCell>{item.orderBy.mobile}</TableCell>
        <TableCell>
-       <Select defaultValue={status}
+       <Select 
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           label="Status"
           size='small'
-          value={process}
+          value={process ? process : status}
           onChange={handleChangeProcess}
+          disabled={status === 'Succeeded' ? true : false}
         >
           {
             statusList.map((item, index) => (
-              <MenuItem key={index} value={item}>{item}</MenuItem>
-            ))
+              <MenuItem key={index} value={item}>{item}</MenuItem>))
           }
         </Select>
        </TableCell>
        <TableCell>{formatMoney(item.total)} VND</TableCell>
-       <TableCell>{item.coupon}</TableCell>
+       <TableCell>{moment(item?.updatedAt).format('hh:mm:ss DD/MM/YYYY')}</TableCell>
+       <TableCell>{item?.isPaid ? 'Đã thanh toán' : 'Chưa thanh toán'}</TableCell>
        <TableCell>
         <ButtonGroup>
           <Button variant='contained' color='success' onClick={handleSave} disabled={!activeSave}>Save</Button>

@@ -1,4 +1,4 @@
-import { Box } from '@mui/material'
+import { Box, Button } from '@mui/material'
 import { apiListShoppingHistory } from 'apis'
 import moment from 'moment'
 import React, { useEffect, useState } from 'react'
@@ -9,7 +9,7 @@ const ShoppingHistory = () => {
 
   const fetchListShippingHistory = async() => {
       const res = await apiListShoppingHistory()
-      setHistoryList(res.data?.shoppingHistory)
+      setHistoryList(res.data?.shoppingHistory.reverse())
   }
   
 
@@ -32,9 +32,13 @@ const ShoppingHistory = () => {
               <p>Số lượng: {item?.count}</p>
             </div>
           </div>
-          <div className="flex-2">
+          <div className="flex-2 gap-2 flex flex-col">
             <h1 className="text-main text-lg">{formatMoney(item?.price * item?.count)} VND</h1>
-            <p>Tiến trình: {item?.status || 'Đang xử lý'}</p>
+            <Button color='success'></Button>
+            <p>Tiến trình: <Button variant='contained' 
+            color={`${item?.status === 'Canceled' ? 'error' : 
+                      item?.status === 'Processing' ? 'info' : 
+                      item?.status === 'Shipping' ? 'secondary' : 'success' }`}>{item?.status || 'Đang xử lý'}</Button></p>
             <p>Mua tại ngày: {moment(item?.createdAt).format('hh:mm:ss DD/MM/YYYY')}</p>
           </div>
         </div>

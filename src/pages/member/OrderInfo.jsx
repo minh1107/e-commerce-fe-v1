@@ -1,6 +1,7 @@
 import { Box, Button, Modal, Step, StepLabel, Stepper } from "@mui/material";
-import { apiCurrentOrder } from "apis";
+import { apiCurrentOrder, apiVerifyReceive } from "apis";
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 const steps = ["Đặt hàng", "Xét duyệt","Giao hàng", "Nhận hàng"];
 const processList = ["Canceled", 'Processing', 'Shipping', 'Succeeded'] 
@@ -10,6 +11,7 @@ const OrderInfoItem = ({item}) => {
   const [process, setProcess] = useState(0)
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [isVerify, setIsVerify] = useState(false)
   useEffect(() => {
     if(item.status === processList[1]) {
       setProcess(1)
@@ -21,8 +23,20 @@ const OrderInfoItem = ({item}) => {
     }
   }, [])
   
+  const handleVerifyReceive = async(id) => {
+      try {
+        const res = await apiVerifyReceive(id)
+        if(res.status) {
+         Swal.fire('Xác nhận đã nhận hàng', res.status, 'success') 
+         setIsVerify(true)
+        }
+      } catch (error) {
+        Swal.fire('Có lỗi gì đó', error, 'error') 
+      }
+  }
+
   return (
-    <Box sx={{ width: "100%" }} alignItems={'center'} className="flex flex-col border-[2px] py-4">
+    <Box sx={{ width: "100%" }} alignItems={'center'} className={`flex flex-col border-[2px] py-4 ${isVerify && 'hidden'}`}>
       {item?.products?.map((el) => (
         <ul key={el?.id} className="flex items-center  gap-4">
           <img src={el?.thumb} alt="" className="w-10 h-10"/>
@@ -61,6 +75,9 @@ const OrderInfoItem = ({item}) => {
         </div>
       </Modal>
     </Stepper>
+    {
+      item.status === processList[3] && <Button onClick={() => handleVerifyReceive(item._id)}>Xác nhận</Button> 
+    }
   </Box>
   )
 }

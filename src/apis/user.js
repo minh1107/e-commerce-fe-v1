@@ -107,3 +107,9 @@ export const apiUpdateHistoryShopping = (data) => instance({
   method: 'put',
   data
 })
+
+export const apiMonthlyRevenue = () => instance({
+  url: '/user/monthlyRevenue',
+  method: 'get',
+})
+
