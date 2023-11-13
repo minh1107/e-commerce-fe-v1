@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes,useNavigate  } from "react-router-dom";
 import paths from "./utils/paths";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,8 +16,11 @@ import Favorite from "pages/member/Favorite";
 import OrderInfo from "pages/member/OrderInfo";
 import ContactUs from "pages/public/ContactUs";
 import CreateBlog from "pages/admin/CreateBlog";
+import BlogDetail from "pages/public/BlogDetail";
+import ManagerBlogs from "pages/admin/ManagerBlogs";
 
 function App() {
+  const navigate = useNavigate();
   const dispatch = useDispatch()
   const { isShowModal, modalChildren } = useSelector(state => state.appReducer)
   useEffect(() => {
@@ -36,6 +39,7 @@ function App() {
           <Route path={paths.PRODUCTS} element={<Products />}/>
           <Route path={paths.OUR_SERVICES} element={<Service />}/>
           <Route path={paths.FINAL_REGISTER} element={<FinalRegister />}/>
+          <Route path={paths.BLOG_DETAIL} element={<BlogDetail />}/>
         </Route>
         <Route path={paths.ADMIN} element={<AdminLayout />}>
           <Route path={paths.DASHBOARD} element={<Dashboard />}/>
@@ -44,6 +48,7 @@ function App() {
           <Route path={paths.MANAGER_ORDER} element={<ManagerOrder />}/>
           <Route path={paths.CREATE_PRODUCT} element={<CreateProduct />}/>
           <Route path={paths.CREATE_BLOG} element={<CreateBlog />}/>
+          <Route path={paths.BLOG_DASHBOARD} element={<ManagerBlogs />}/>
         </Route>
         <Route path={paths.MEMBER} element={<MemberLayout />}>
           <Route path={paths.PERSONAL} element={<Personal />}/>

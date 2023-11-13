@@ -9,8 +9,7 @@ import { RxSlash } from 'react-icons/rx'
 import {GiReturnArrow} from 'react-icons/gi'
 import {BiSolidPhoneCall, BiSolidUserPin} from 'react-icons/bi'
 import {IoCreate} from 'react-icons/io5'
-import {ImBin} from 'react-icons/im'
-
+import {ImBin, ImBlog} from 'react-icons/im'
 const icons = {
     MdFavorite, FaHistory, GrPersonalComputer,FaLocationArrow,
     AiFillHeart,ImBin,
@@ -53,7 +52,7 @@ const icons = {
     FaBlog,
 
     // logout
-    BsCloudUploadFill
+    BsCloudUploadFill, ImBlog
     
 }
 

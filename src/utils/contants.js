@@ -6,7 +6,7 @@ const {
   BiSolidUserPin,
   FaProductHunt,
   IoCreate,
-  BsFillCartCheckFill, MdFavorite, GrPersonalComputer, FaHistory, FaBlog
+  BsFillCartCheckFill, MdFavorite, GrPersonalComputer, FaHistory, FaBlog, ImBlog
 } = icons;
 
 export const navigation = [
@@ -78,6 +78,12 @@ export const pathAdmin = [
     value: "Create blog",
     path: `/${paths.ADMIN}/${paths.CREATE_BLOG}`,
     icon: FaBlog
+  },
+  {
+    id: 6,
+    value: "Manager blogs",
+    path: `/${paths.ADMIN}/${paths.BLOG_DASHBOARD}`,
+    icon: ImBlog
   },
 ];
 

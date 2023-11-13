@@ -38,16 +38,12 @@ const ProductEdit = ({dataProductEdit, onclick}) => {
   const handleThumbSelect = (event) => {
     const selectedFile = event.target.files[0];
     setSelectedThumb(selectedFile);
-
-    // Set value for react-hook-form
     setValue("thumb", selectedFile);
   };
 
   const handleImageSelect = (event) => {
     const selectedFiles = Array.from(event.target.files);
     setSelectedImages(selectedFiles);
-
-    // Set value for react-hook-form
     setValue("images", selectedFiles);
   };
 
@@ -55,8 +51,6 @@ const ProductEdit = ({dataProductEdit, onclick}) => {
     const updatedImages = [...selectedImages];
     updatedImages.splice(index, 1);
     setSelectedImages(updatedImages);
-
-    // Set value for react-hook-form
     setValue("images", updatedImages);
   };
   const changeValue = useCallback(
@@ -90,7 +84,6 @@ const ProductEdit = ({dataProductEdit, onclick}) => {
       for(const r of ramList) {
         formData.append('ram', r);
       }
-      console.log(123, ramList)
     } else {
       for(const r of req.ram) {
         formData.append('ram', r);

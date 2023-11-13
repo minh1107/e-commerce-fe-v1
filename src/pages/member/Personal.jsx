@@ -95,7 +95,7 @@ const Personal = () => {
           <TextField {...register("mobile", {
             required: 'Không được để trống',
             pattern: {
-              value: /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/g,
+              value: /^\d{8,}$/g,
               message: 'Hãy điền đúng định dang số điện thoại(10 chữ số)'
             }
           })} defaultValue={currentUser?.data?.mobile} disabled={!isEdit}/>

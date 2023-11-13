@@ -10,7 +10,7 @@ const paths = {
     DETAIL_PRODUCT_CATEGORY_PID_TITLE: ':category/:pid/:title',
     FINAL_REGISTER: 'finalregister/:status',
     RESET_PASSWORD: 'resetpassword/:token',
-
+    BLOG_DETAIL: 'blogs/:bid',
     // admin
     ADMIN: 'admin',
     DASHBOARD: 'dashboard',
@@ -19,6 +19,7 @@ const paths = {
     MANAGER_ORDER: 'manager-order',
     CREATE_PRODUCT: 'create-product',
     CREATE_BLOG: 'create-blog',
+    BLOG_DASHBOARD: 'manager-blogs',
     // member
     MEMBER: 'member',
     PERSONAL: 'personal',
