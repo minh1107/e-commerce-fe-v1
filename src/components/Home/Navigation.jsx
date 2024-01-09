@@ -21,15 +21,14 @@ const Navigation = () => {
 
   return (
     <div className="xl:w-main md:w-tablet h-12 mb-4 py-2 border-y text-sm flex items-center">
-      {navigation.map((el) => {
+      {navigation?.map((el) => {
         if (el.id === 6) {
           return (
-            <div>
+            <div key={el.id}>
               <div
                 className="pr-12 hover:text-main font-semibold cursor-pointer uppercase"
                 onClick={handleClick}
               >
-                {" "}
                 {el.value}
               </div>
               <Menu
@@ -42,11 +41,10 @@ const Navigation = () => {
                   "aria-labelledby": "basic-button",
                 }}
               >
-                {productCategory?.data?.map((el) => (
-                  <MenuItem>
+                {productCategory?.data?.map((el, index) => (
+                  <MenuItem  key={createSlug(el.title)}>
                     <NavLink
                       onClick={handleClose}
-                      key={createSlug(el.title)}
                       to={`/${el.title.toLowerCase()}`}
                       className={({ isActive }) =>
                         isActive

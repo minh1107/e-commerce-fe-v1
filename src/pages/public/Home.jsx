@@ -23,7 +23,7 @@ const Home = () => {
   const { newArrival } = useSelector((state) => state.productReducer);
 
   return (
-    <div className="flex items-center justify-center gap-5 flex-col">
+    <div className="flex items-center justify-center gap-5 mb-10 flex-col">
       <div className="xl:w-main md:w-tablet flex gap-5">
         <div className="w-[25%] flex-auto">
           <Sidebar />
@@ -54,15 +54,15 @@ const Home = () => {
           </h1>
           <HotCollection />
         </div>
-        <div>
+        {/* <div>
           <h1 className="font-bold mb-5 text-xl uppercase py-4 border-b-4 border-b-main">
             BLOG POSTS
           </h1>
-        </div>
-        <div className="flex mb-10">
+        </div> */}
+        {/* <div className="flex mb-10">
         <Donors />
         </div>
-        <SecureImage />
+        <SecureImage /> */}
       </div>
     </div>
   );

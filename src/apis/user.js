@@ -30,7 +30,7 @@ export const apiResetpassword = (data) => {
   })
 } 
   
-export const apiCurrent = () => {
+export const apiCurrentUser = () => {
   return instance({
     url: "/user/current",
     method: 'get'

@@ -3,7 +3,7 @@ import * as apis from '../../apis'
 
 export const getCurrentUser = createAsyncThunk('user/current', async(data, {rejectWithValue}) => {
     try {
-        const response = await apis.apiCurrent()
+        const response = await apis.apiCurrentUser()
         return response; // Assuming your API response has a `data` property
     } catch (error) {
         return rejectWithValue(error.response.data); // Pass the error response data

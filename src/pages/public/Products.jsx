@@ -16,7 +16,6 @@ const breakpointColumnsObj = {
 };
 const Products = () => {
   const { category } = useParams()
-  console.log(category)
   const [product, setProduct] = useState()
   const [totalProducts, setTotalProducts] = useState()
   const [page, setPage] = useState(1)
@@ -100,7 +99,6 @@ const Products = () => {
             <h1 className='font-semibold'>Filter</h1>
             <div className='flex gap-3'>
               <SearchItem name={'Price'} activeClick={activeClick} changeActiveFilter={changeActiveFilter} type='input' />
-              {/* <SearchItem name={'Color'} activeClick={activeClick} changeActiveFilter={changeActiveFilter} type='checkbox'/> */}
             </div>
           </div>
           <div>

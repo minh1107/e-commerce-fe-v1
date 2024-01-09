@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import withBaseComponent from "hocs/withBaseComponent";
 
 const { AiTwotoneHeart, MdMenu, FaEye } = icons;
-const Product = ({ productData, isNew, widthImg, isSale, isLast }) => {
+const Product = ({ productData, isNew, widthImg, isSale}) => {
   const [showOption, setShowOption] = useState(false);
 
   return (

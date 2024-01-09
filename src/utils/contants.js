@@ -36,7 +36,7 @@ export const navigation = [
     path: `/${paths.OUR_SERVICES}`,
   },
   {
-    id: 1,
+    id: 4,
     value: "CONTACT US",
     path: `/${paths.CONTACT_US}`,
   },

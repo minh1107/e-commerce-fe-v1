@@ -172,7 +172,7 @@ export default function Dashboard() {
     ],
   };
 
-
+  console.log(userList)
   return (
     <div>
       <div>Tổng doanh thu tháng này: {formatPrice(recordsNumber, "VND")}</div>

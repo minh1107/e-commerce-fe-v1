@@ -161,9 +161,9 @@ const Row = ({item, pages, index, fetchOrderList, status, statusList}) => {
       </IconButton>
     </TableCell>
        <TableCell>{(pages-1)*7 + index + 1}</TableCell>
-       <TableCell>{item.orderBy.firstname + " " + item.orderBy.lastname}</TableCell>
-       <TableCell>{item.orderBy.email}</TableCell>
-       <TableCell>{item.orderBy.mobile}</TableCell>
+       <TableCell>{item.orderBy?.firstname + " " + item.orderBy?.lastname}</TableCell>
+       <TableCell>{item.orderBy?.email}</TableCell>
+       <TableCell>{item.orderBy?.mobile}</TableCell>
        <TableCell>
        <Select 
           labelId="demo-simple-select-label"
