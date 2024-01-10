@@ -10,7 +10,7 @@ const HotCollection = () => {
         {productCategory?.data?.map((item) => {
           if (item.brand.length)
             return (
-              <div className="flex  min-w-[calc(33.33%-20px)] p-[15px] border flex-1 box-border" key={item._id}>
+              <div className="flex  min-w-[calc(33.33%-20px)] p-[15px] border flex-1 box-border max-md:min-w-full" key={item._id}>
                 <div className="pl-5 flex-1">
                 <img src={item.image} alt="" className=""/>
                 </div>

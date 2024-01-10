@@ -25,7 +25,7 @@ const TopHeader = () => {
   return (
     <div className='h-10 w-full flex bg-main'>
         <div className='xl:w-main md:w-tablet m-auto h-full text-white flex text-sm items-center justify-between'>
-            <div className=''>
+            <div className='max-md:hidden'>
                 <p>Đặt hàng tại: 0329933496</p>
             </div>
             <div>

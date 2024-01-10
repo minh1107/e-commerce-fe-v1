@@ -24,32 +24,32 @@ const Home = () => {
 
   return (
     <div className="flex items-center justify-center gap-5 mb-10 flex-col">
-      <div className="xl:w-main md:w-tablet flex gap-5">
-        <div className="w-[25%] flex-auto">
+      <div className="xl:w-main md:w-tablet flex gap-5 max-md:flex-col max-md:w-full max-md:gap-0">
+        <div className="w-[25%] flex-auto max-md:w-full">
           <Sidebar />
         </div>
-        <div className="w-[100%] flex-auto">
+        <div className="w-[100%] flex-auto max-md:w-full">
           <Banner />
         </div>
       </div>
-      <div className="xl:w-main md:w-tablet flex gap-5">
-        <div className="w-[25%] flex-auto">
+      <div className="xl:w-main md:w-tablet flex gap-5 max-md:flex-col">
+        <div className="w-[25%] flex-auto max-md:w-full">
           <DealDaily />
         </div>
-        <div className="w-[75%] flex-auto">
+        <div className="w-[75%] flex-auto max-md:w-full max-md:hidden">
           <BestSeller />
         </div>
       </div>
       <div className="flex xl:w-main md:w-tablet gap-5 flex-col">
         <FeatureProduct />
-        <div>
+        <div className="max-md:hidden">
           <h1 className="font-bold mb-5 text-xl py-4 border-b-4 w-full border-b-main">
             NEW ARRIVALS
           </h1>
-          <CustomSlider slidesToShow={5} productsData={newArrival} widthImg={"w-[345px]"} />
+          <CustomSlider slidesToShow={5} productsData={newArrival} widthImg={"345px"} />
         </div>
         <div>
-          <h1 className="font-bold mb-5 text-xl uppercase py-4 border-b-4 border-b-main">
+          <h1 className="font-bold mb-5 text-xl uppercase py-4 border-b-4 border-b-main max-md:mx-2">
             Hot Collection
           </h1>
           <HotCollection />

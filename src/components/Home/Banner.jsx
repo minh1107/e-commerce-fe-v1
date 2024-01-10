@@ -35,6 +35,7 @@ const Banner = () => {
         if(count == 0) setCount(2)
         else setCount(pre => pre-1)
     }
+    
   return (
     <div className='relative [&>.row-right]:hover:animate-leftSlideButtonEffectHover shadow-md
         [&>.row-right]:animate-leftSlideButtonEffectAfterHover 
@@ -46,7 +47,7 @@ const Banner = () => {
             if(index == count)
             return (
             <div className='animate-easeInDisplay' key={index}>
-                <p className='h-[600px] w-full bg-cover bg-no-repeat bg-center' style={{backgroundImage: `url(${item?.slide})`}} ></p>
+                <p className='h-[600px] w-full bg-cover bg-no-repeat bg-center max-md:h-[400px]' style={{backgroundImage: `url(${item?.slide})`}} ></p>
                 <div className={`text-white absolute top-[50%] translate-y-[-50%] ${item.style == 'align-center' ? 'text-center left-[50%] translate-x-[-50%]' : 'xl:left-[10%] left-[8%]'} `}>
                     <h1 className={`text-[50px] font-semibold mb-[15px] leading-[60px] ${item.style == 'align-center' ? 'animate-textRight500' : 'animate-textDown500'} `}>
                         <div className=''>{item?.heading1}</div> 

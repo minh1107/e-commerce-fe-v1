@@ -5,7 +5,7 @@ const h1Style = `border-l-4 border-main pl-2 font-semibold mb-5 uppercase`
 const {FaMapMarkerAlt,BsFillTelephoneFill,RiPhoneFill } = icons
 const FooterMain = () => {
   return (
-      <div className="flex text-white w-main my-[50px]">
+      <div className="flex text-white w-main my-[50px] max-md:flex-col max-md:gap-6">
         <div className="flex-2">
             <h1 className={`${h1Style}`}>Main information</h1>
             <div className="text-sm flex flex-col gap-[10px]">

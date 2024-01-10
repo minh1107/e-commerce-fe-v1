@@ -21,11 +21,11 @@ const Header = () => {
     setAnchorEl(null);
   };
   return (
-    <div className="flex justify-between xl:w-main md:w-tablet h-[110px] items-center">
+    <div className="flex justify-between xl:w-main md:w-tablet h-[110px] items-center max-md:w-full max-md:px-[5%]">
       <Link to={paths.HOME}>
         <img
           src={logo}
-          className="w-[234px] h-[10rem] object-contain "
+          className="w-[234px] h-[10rem] object-contain max-md:h-[5rem] max-md:w-auto"
           alt=""
         />
       </Link>

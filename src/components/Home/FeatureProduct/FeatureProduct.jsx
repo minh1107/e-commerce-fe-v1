@@ -14,10 +14,10 @@ const FeatureProduct = () => {
 
   return (
     <div className="w-full">
-      <h1 className="font-bold text-xl py-4 border-b-4 border-b-main">
+      <h1 className="font-bold text-xl py-4 border-b-4 border-b-main max-md:mx-2">
         FEATURED PRODUCTS
       </h1>
-      <div className="flex mt-5 w-full flex-wrap">
+      <div className="flex mt-5 w-full flex-wrap max-md:gap-5">
         {featureProduct?.map((item) => (
           <Item item={item} key={item._id}/>
         ))}

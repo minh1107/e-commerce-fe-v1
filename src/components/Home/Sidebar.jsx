@@ -8,7 +8,7 @@ const Sidebar = () => {
   const { productCategory } = useSelector((state) => state.appReducer);
 
   return (
-    <div className="flex h-full flex-col border shadow-md">
+    <div className="flex h-full flex-col border shadow-md ">
       <div className="pt-[14px] bg-main mb-5 text-white font-semibold pb-[15px] px-5 text-base">
         ALL COLLECTIONS
       </div>
@@ -22,7 +22,7 @@ const Sidebar = () => {
               : "hover:text-main flex-1 px-5 text-md"
           }
         >
-          <div className="flex gap-4 items-center">
+          <div className="flex gap-4 items-center mb-4">
             <img src={el.image} alt="thumb" className="w-5 h-5 rounded-full" />
             <span>{el.title}</span>
           </div>
