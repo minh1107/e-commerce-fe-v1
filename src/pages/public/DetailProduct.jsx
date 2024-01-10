@@ -3,7 +3,6 @@ import { Link, useParams } from 'react-router-dom'
 import { apiCreateAndUpdateOrder, apiGetAllProduct, apiGetProduct } from '../../apis'
 import { BreadCrumb } from '../../components'
 import Slider from 'react-slick'
-import ReactImageMagnify from 'react-image-magnify';
 import { HtmlStringToReact, formatPrice, ratingStar } from '../../utils/helper'
 import icons from '../../utils/icons'
 import { Box, Button } from '@mui/material'
