@@ -79,14 +79,16 @@ const Login = () => {
     <div className="h-screen w-screen relative">
       <img src={background} alt="" className="absolute w-full h-full object-cover top-0 bottom-0 right-0 left-0"/>
       {isForgotPassword ? 
-        <form onSubmit={(e) => handleResetPassword(e)} className="flex flex-col gap-5 w-[600px] rounded-md bg-white p-10 top-[10%] left-[10%] absolute">
+        <form onSubmit={(e) => handleResetPassword(e)} className="flex flex-col gap-5 w-[600px] rounded-md bg-white p-10 top-[10%] left-[10%] absolute
+        max-md:w-[90%] max-md:left-[5%] max-md:mt-0">
           <TextField required value={getPassword} onChange={(e) => setGetPassword(e.target.value)} type="text" variant="outlined" label="Enter your email"/>
           <Box className="flex gap-2 justify-end">
             <Button  variant="contained" color="primary" size="large" type="submit">Submit</Button>
             <Button  variant="outlined" size="large" onClick={() => setIsForgotPassword(false)}>Back</Button>
           </Box>
         </form>
-      :<form onSubmit={(e) => handleSubmit(e)} className="flex flex-col gap-5 w-[600px] rounded-md bg-white p-10 top-[10%] left-[10%] absolute">
+      :<form onSubmit={(e) => handleSubmit(e)} className="flex flex-col gap-5 w-[600px] rounded-md bg-white p-10 top-[10%] left-[10%] absolute 
+      max-md:w-[90%] max-md:left-[5%] max-md:mt-0">
         <h1 className="text-2xl text-center font-bold text-main">{isRegister ? 'Register' : 'Login'}</h1>
           {isRegister && <TextField required value={payload.firstname} onChange={(e) => setPayload(pre => ({...pre, firstname: e.target.value}))} type="text" variant="outlined" label="Firstname"/>}
           {isRegister && <TextField required value={payload.lastname} onChange={(e) => setPayload(pre => ({...pre, lastname: e.target.value}))} type="text" variant="outlined" label="Lastname"/>}

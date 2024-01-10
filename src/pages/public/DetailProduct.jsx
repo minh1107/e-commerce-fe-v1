@@ -93,14 +93,14 @@ const DetailProduct = () => {
         <h3 className='xl:w-main md:w-tablet'>{title}</h3>
         <BreadCrumb title={title} category={category}/>
       </div>
-      <div className='xl:w-main md:w-tablet m-auto flex mt-4'>
-        <div className='w-2/5 flex gap-4 flex-col'>
+      <div className='xl:w-main md:w-tablet m-auto flex mt-4 max-md:flex-col max-md:w-full'>
+        <div className='w-2/5 flex gap-4 flex-col max-md:w-full'>
           <div className='border'>
             <Zoom>
               <img src={product?.images[imgSetted] || product?.thumb} alt="" className='w-[600px] h-[500px] object-contain'/>
             </Zoom>
           </div>
-          <div className='w-full'>
+          <div className='w-full max-md:hidden'>
             <Slider {...settings}>
               {product?.images?.map((el, index) => (
                 <div className='px-2'>
@@ -111,7 +111,7 @@ const DetailProduct = () => {
             </Slider>
           </div>
         </div>
-        <div className='w-2/5 '>
+        <div className='w-2/5 max-md:w-full'>
           <div className='pl-[45px] relative'>
                 <div className='absolute font-semibold text-main hover:cursor-pointer flex top-[10px] right-[30px] items-center text-[12px]'>
                   <span>{product?.sold} sold</span>
@@ -145,9 +145,9 @@ const DetailProduct = () => {
                 </Box>
           </div>
         </div>
-        <ul className='w-1/5 '>
+        <ul className='w-1/5 max-md:w-full'>
         { policy?.map(el => (  
-          <li className='flex items-center p-2.5 mb-2.5 border gap-2'>
+          <li className='flex items-center p-2.5 mb-2.5 border gap-2 max-md:w-[90%] max-md:ml-[5%]'>
             <el.icon size={36} color='white' className='p-2 bg-slate-800 rounded-full'/>
             <div className=''>
               <p className='text-[14px]'>Guarantee</p>
@@ -159,7 +159,7 @@ const DetailProduct = () => {
       <div className='xl:w-main md:w-tablet m-auto mt-5'>
         <ProductInfomation pid={pid} product={product}/>
       </div>
-      <div className='xl:w-main md:w-tablet m-auto mb-28'>
+      <div className='xl:w-main md:w-tablet m-auto mb-28 max-md:hidden'>
         <h1 className="font-bold mb-5 text-xl py-4 border-b-4 w-full border-b-main">
           OTHER CUSTOMERS ALSO BUY:
         </h1>

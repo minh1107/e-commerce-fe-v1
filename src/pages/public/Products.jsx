@@ -93,8 +93,8 @@ const Products = () => {
         <h3 className='xl:w-main md:w-tablet capitalize text-[18px] font-semibold'>{category === ':category' ? 'Product' : category}</h3>
         <BreadCrumb category={category}/>
       </div>
-      <div className='m-auto xl:w-main md:w-tablet mt-8 flex gap-4'>
-        <div className='border p-4 border-gray-300 shadow-md rounded-md flex flex-col w-[350px]'>
+      <div className='m-auto xl:w-main md:w-tablet mt-8 flex gap-4 '>
+        <div className='border p-4 border-gray-300 shadow-md rounded-md flex flex-col w-[350px] max-md:hidden'>
           <div>
             <h1 className='font-semibold'>Filter</h1>
             <div className='flex gap-3'>
@@ -115,8 +115,8 @@ const Products = () => {
             columnClassName="my-masonry-grid_column">
               {
                 product?.map((el, index) => (
-                  <Product key={el._id}
-                          productData={el} 
+                  <Product key={el._id} 
+                          productData={el} widthImg={'max-md:h-[180px] max-md:w-[90%]'} 
                   />
                 ))
               }

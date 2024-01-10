@@ -55,7 +55,7 @@ const ProductInfomation = ({pid, product}) => {
 
   return (
     <>
-      <div className="flex items-center gap-2 relative bottom-[-2px]">
+      <div className="flex items-center gap-2 relative bottom-[-2px] max-md:flex-wrap">
         {tabDetailProduct.map((item) => (
           <span
             onClick={() => setActiveTab(item.id)}
@@ -66,10 +66,10 @@ const ProductInfomation = ({pid, product}) => {
           </span>
         ))}
       </div>
-      <ul className='text-[14px] border rounded-md shadow-md p-4 h-[500px]'>
+      <ul className='text-[14px] border rounded-md shadow-md p-4 h-[500px] max-md:w-full max-md:my-4 max-md:h-auto'>
             {activeTab === 5 ?
-            <div className="overflow-y-scroll h-[450px]">
-              <div className="flex w-[900px] border-gray-700 border rounded-md">
+            <div className="overflow-y-scroll h-[450px] ">
+              <div className="flex w-[900px] border-gray-700 border rounded-md max-md:w-full">
                 <div className="flex-1 border-r-[1px] border-gray-700 w-full flex items-center justify-center flex-col">
                   <h2 className="text-2xl  font-bold items-center">{report?.length}/5</h2>
                   <div className="flex gap-[4px]">
@@ -102,7 +102,7 @@ const ProductInfomation = ({pid, product}) => {
                 ))}
               </div>
             </div> 
-            : <div>
+            : <div className="h-auto">
               {detailProduct.find((item, index) => index+1 === activeTab)}
             </div>
         }</ul>
