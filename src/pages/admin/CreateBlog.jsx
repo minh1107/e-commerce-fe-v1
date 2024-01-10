@@ -43,8 +43,8 @@ const CreateBlog = () => {
           <Button type='submit' variant='contained' color='info' className='w-2/3 rounded-md p-2 text-white mx-auto my-4'>Xuất bản</Button>
           <textarea value={description} onChange={(e) => setDescription(e.target.value)} name="" id="" cols="30" rows="10" className='border-[1px] outline-none border-gray-100 shadow-sm mx-2 p-2 h-40' placeholder='Description'></textarea>
           <select value={category} onChange={(e) => setCategory(e.target.value)} name="" id="">
-            <option value="phone">phone</option>
-            <option value="table">tablet</option>
+            <option value="phone">Phone</option>
+            <option value="table">Tablet</option>
             <option value="pc">Pc</option>
           </select>
         </div>
