@@ -82,7 +82,7 @@ const ManageProduct = () => {
   }
   return (
     <div>
-      <h1 className='py-2 text-3xl font-semibold'>ManageProduct</h1>
+      <h1 className='py-2 text-3xl font-semibold'>Manage Product</h1>
       <div className='flex justify-end items-center w-full'>
             <TextField className='w-[30%]' size='small' label="Search products" value={searchInput}  onChange={handleSearchSubmit}/>
       </div>
