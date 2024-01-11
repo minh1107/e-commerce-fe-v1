@@ -25,8 +25,6 @@ const DealDaily = () => {
     fetchDailyDeal();
   }, [expire]);
 
-
-  console.log('dailyDeal', dailyDeal)
   return (
     <div className="w-full border h-full flex flex-col gap-3 pb-5 items-center shadow-md">
       <div className="flex my-5 text-xl items-center w-full">

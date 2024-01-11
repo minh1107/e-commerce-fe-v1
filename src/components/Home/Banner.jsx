@@ -23,9 +23,6 @@ const slides = [{ slide: slide1,
                   style: 'align-center'}]
 const Banner = () => {
     const [count, setCount] = useState(0)
-    useEffect(() => {
-
-    }, [count])
 
     const handlePlusSlide = () => {
         if(count == 2) setCount(0) 
