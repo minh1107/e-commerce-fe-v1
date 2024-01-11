@@ -1,6 +1,6 @@
 import icons from "./icons";
 import paths from "./paths";
-
+import RestoreIcon from '@mui/icons-material/Restore';
 const {
   MdSpaceDashboard,
   BiSolidUserPin,
@@ -112,7 +112,7 @@ export const pathProfile = [
     id: 1,
     value: "Shopping history",
     path: `/${paths.MEMBER}/${paths.SHOPPING_HISTORY}`,
-    icon: FaHistory 
+    icon: RestoreIcon 
   },
   {
     id: 1,

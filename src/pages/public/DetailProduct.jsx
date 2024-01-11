@@ -13,6 +13,7 @@ import SelectOptionProduct from 'components/common/SelectOptionProduct'
 import { apiCreateAndUpdateCart } from 'apis/cart'
 import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
+import Swal from 'sweetalert2'
 
 const { BsSquareFill, RxSlash } = icons
 let settings
@@ -84,7 +85,16 @@ const DetailProduct = () => {
     }
     const handleSubmit = async() => {
       const req = {quantity:quantityNumber, color, ram, internal, pid, price: product.price}
-      const res = await apiCreateAndUpdateCart(req)
+      try {
+        const res = await apiCreateAndUpdateCart(req)   
+        if(res.status) {
+          Swal.fire('Thêm vào giỏ hàng thành công',  'Cảm ơn bạn đã mua hàng','success')          
+        } else {
+          Swal.fire('Thêm vào giỏ hàng thất bại', 'Vui lòng thêm lại sản phẩm', 'error')
+        }
+      } catch (error) {
+        Swal.fire('Thêm vào giỏ hàng thất bại', 'Vui lòng thêm lại sản phẩm', 'error')
+      }
     }
     
   return (
@@ -100,12 +110,12 @@ const DetailProduct = () => {
               <img src={product?.images[imgSetted] || product?.thumb} alt="" className='w-[600px] h-[500px] object-contain'/>
             </Zoom>
           </div>
-          <div className='w-full max-md:hidden'>
+          <div className='w-full '>
             <Slider {...settings}>
               {product?.images?.map((el, index) => (
-                <div className='px-2'>
+                <div className='p-2'>
                   <img onClick={() => setImgSetted(index)} src={el} alt="detail product" 
-                  lassName='hover:cursor-pointer m-auto w-[143px] h-[143px] border object-cover'/>
+                  className='hover:cursor-pointer p-2 rounded-md shadow-sm w-[143px] h-[143px] border object-contain'/>
                 </div>
                 ))}
             </Slider>
@@ -163,7 +173,7 @@ const DetailProduct = () => {
         <h1 className="font-bold mb-5 text-xl py-4 border-b-4 w-full border-b-main">
           OTHER CUSTOMERS ALSO BUY:
         </h1>
-        <CustomSlider isSale={false} productsData={interestedProduct} widthImg={'300px'}/>
+        <CustomSlider isSale={false} productsData={interestedProduct} widthImg={'300px'} slidesToShow={5}/>
       </div>
     </div>
   )

@@ -20,6 +20,7 @@ import ListItemText from "@mui/material/ListItemText";
 import icons from "utils/icons";
 import { pathAdmin, pathProfile } from "utils/contants";
 import OrderInfo from "./OrderInfo";
+import NavigateMobile from "./NavigateMobile";
 
 const drawerWidth = 240;
 const { AiFillCaretLeft, GiReturnArrow } = icons;
@@ -39,28 +40,32 @@ function MemberLayout() {
   };
 
   return (
-    <Box className="flex w-full ">
+    <div className="flex-col max-md:flex w-full max-md:overflow-hidden">
+    <Box className="flex w-full flex-1 ">
       <CssBaseline />
       <AppBar open={open}>
-        <Toolbar className="bg-main">
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{
-              marginRight: 5,
-              ...(open && { display: "none" }),
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
+        <Toolbar className="bg-main max-md:justify-between">
+          <div className="max-md:hidden">
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              sx={{
+                marginRight: 5,
+                ...(open && { display: "none" }),
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+          </div>
           <Typography variant="h6" noWrap component="div">
             Profile
           </Typography>
+          <Link to={'/'}>Home</Link>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open} className="shadow-xl">
+      <Drawer variant="permanent" open={open} className="shadow-xl max-md:hidden">
         <DrawerHeader className="shadow-xl">
           <Typography fontSize={25}>Menu</Typography>
           <IconButton onClick={handleDrawerClose}>
@@ -131,6 +136,10 @@ function MemberLayout() {
         <Outlet />
       </Box>
     </Box>
+    <div className="max-md:block hidden">
+      <NavigateMobile />
+    </div>
+    </div>
   );
 }
 export default MemberLayout;

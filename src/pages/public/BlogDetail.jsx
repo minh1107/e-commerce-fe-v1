@@ -39,21 +39,23 @@ const BlogDetail = () => {
 
   return (
     <div className='xl:w-main md:w-tablet mx-auto my-10'>
-        <h1 className='font-bold text-xl'>Tiêu đề: {blog?.title}</h1>
-        <p>Tác giả: {blog?.author}</p>
-        <p>Loại: {blog?.category}</p>
-        <p>Số lượt xem: {blog?.numberViews}</p>
-        <div className='flex gap-4'>
-            <div className='flex items-center'>
-                <Button onClick={handleLike}>Like</Button>
-                <p>{like}</p>
-            </div>
-            <div className='flex items-center'>
-                <Button onClick={handleDislike}>Dislike</Button>
-                <p>{dislike}</p>
+        <div className='border-2 p-2 bg-gray-300 rounded-xl mb-4 shadow-xl'>
+            <h1 className='font-bold text-xl'>Tiêu đề: {blog?.title}</h1>
+            <p>Tác giả: {blog?.author}</p>
+            <p>Loại: {blog?.category}</p>
+            <p>Số lượt xem: {blog?.numberViews}</p>
+            <div className='flex gap-4 '>
+                <div className='flex items-center gap-4'>
+                    <Button variant='contained' onClick={handleLike}>Like</Button>
+                    <p className='p-2 px-4 border-2 rounded-full bg-blue-400 cursor-pointer'>{like}</p>
+                </div>
+                <div className='flex items-center gap-4'>
+                    <Button variant='contained' onClick={handleDislike}>Dislike</Button>
+                    <p className='p-2 px-4 border-2 rounded-full bg-blue-400 cursor-pointer'>{dislike}</p>
+                </div>
             </div>
         </div>
-        <div dangerouslySetInnerHTML={{__html: blog?.content}}></div>
+        <div className='flex flex-col items-center gap-10' dangerouslySetInnerHTML={{__html: blog?.content}}></div>
     </div>
   )
 }

@@ -25,9 +25,9 @@ const Personal = () => {
       formData.append('email', data.email)
       formData.append('mobile', data.mobile)
       formData.append('avatar', data.avatar[0])
-      console.log(formData)
       dispatch(showModal({isShowModal: true, modalChildren: <Loading />}))
       try {
+        
         const res = await apiUpdateInfoUser(formData)
         if(res.status) {
           dispatch(showModal({isShowModal: false, modalChildren: <Loading />}))
@@ -49,7 +49,6 @@ const Personal = () => {
     setValue('email', currentUser.data.email)
     setValue('mobile', currentUser.data.mobile)
   }, [currentUser])
-  console.log(currentUser)
   return (
     <Paper className='w-full p-4 flex gap-4 flex-col'>
       <div className='flex gap-4 items-center'>

@@ -20,13 +20,14 @@ const Navigation = () => {
   const { productCategory } = useSelector((state) => state.appReducer);
 
   return (
-    <div className="xl:w-main md:w-tablet h-12 mb-4 py-2 border-y text-sm flex items-center max-md:hidden">
+    <div className="xl:w-main md:w-tablet h-12 mb-4 py-2 border-y text-sm flex items-center 
+    max-md:flex-wrap max-md:gap-4 max-md:h-auto max-md:mx-4">
       {navigation?.map((el) => {
         if (el.id === 6) {
           return (
             <div key={el.id}>
               <div
-                className="pr-12 hover:text-main font-semibold cursor-pointer uppercase"
+                className="pr-12 hover:text-main font-semibold cursor-pointer uppercase max-md:pr-0"
                 onClick={handleClick}
               >
                 {el.value}
@@ -73,8 +74,8 @@ const Navigation = () => {
               to={el.path}
               className={({ isActive }) =>
                 isActive
-                  ? "pr-12 uppercase hover:text-main text-main font-semibold"
-                  : "pr-12 hover:text-main font-semibold"
+                  ? "pr-12 uppercase hover:text-main text-main font-semibold max-md:pr-0"
+                  : "pr-12 hover:text-main font-semibold max-md:pr-0"
               }
             >
               {el.value}

@@ -10,16 +10,16 @@ const ContactUs = () => {
         </h3>
         <BreadCrumb category={"Contact us"} />
       </div>
-      <div className="mx-auto">
+      <div className="mx-auto max-md:mx-0">
         <iframe
-          className="xl:w-main h-[600px] my-10 md:w-tablet"
+          className="xl:w-main h-[600px] my-10 md:w-tablet max-md:w-full max-md:h-[50vh]"
           scrolling="no"
           src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Ph%C3%BA%20%C4%91%C3%B4%20-%20Nam%20t%E1%BB%AB%20Li%C3%AAm%20-%20H%C3%A0%20N%E1%BB%99i+(My%20location)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
         >
           <a href="https://www.maps.ie/population/">Population Estimator map</a>
         </iframe>
       </div>
-      <div className="flex mx-auto xl:w-main md:w-tablet">
+      <div className="flex mx-auto xl:w-main md:w-tablet max-md:flex-col max-md:mx-4 max-md:gap-4">
         <div className="flex-1 flex gap-2 flex-col text-sm">
           <p>
             Địa chỉ và thời gian hoạt động của chúng tôi như bên dưới

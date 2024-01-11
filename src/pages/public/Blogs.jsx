@@ -23,10 +23,10 @@ const Blogs = () => {
         </h3>
         <BreadCrumb category={"Blogs"} />
       </div>
-      <div className="xl:w-main flex flex-wrap gap-[3.3%] md:w-tablet mx-auto my-4">
+      <div className="xl:w-main flex flex-wrap gap-[3.3%] md:w-tablet mx-auto my-4 max-md:flex-wrap">
         {
           blogsList?.map(item => (
-            <div className="flex flex-col gap-4 w-[30%] border p-4">
+            <div className="flex flex-col gap-4 w-[30%] border p-4 max-md:w-full max-md:m-2 shadow-md rounded-md">
               <img src={item.image[0]} className="h-[250px] w-full" alt="" />
               <div className="flex flex-col gap-4">
                 <p>Tác giả: {item.author}</p>

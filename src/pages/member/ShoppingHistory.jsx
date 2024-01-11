@@ -21,11 +21,11 @@ const ShoppingHistory = () => {
     <div className="flex gap-4 w-full ">
     <div className="overflow-y-scroll w-full h-[750px]">
       {historyList?.map((item, index) => (
-        <div key={item} className="flex items-center bg-gray-100 rounded-xl m-6 p-4">
+        <div key={item} className="flex items-center bg-gray-100 rounded-xl m-6 p-4 max-md:flex-col">
           <div className="flex items-center flex-5 gap-4">
             <img src={item?.thumb} alt="" className="rounded-xl w-20 h-20 object-contain"/>
             <p>{item?.title}</p>
-            <div className='flex gap-2'>
+            <div className='flex gap-2 max-md:flex-col'>
               <p>Ram: {item?.ram}</p>
               <p>Bộ nhớ: {item?.internal}</p>
               <p>Màu sắc: {item?.color}</p>

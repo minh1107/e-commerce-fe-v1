@@ -152,15 +152,15 @@ const Cart = ({navigate}) => {
     fetchAllOrder();
   }, []);
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-4 max-md:flex-col">
         <div className="flex-6 ">
           <div className="flex mx-6 xl:mx-8 p-4 items-center gap-4">
             <input type="checkbox" onChange={handleToggleAllCheckbox} className="w-4 h-4"/>
             <label className="text-[16px] font-semibold">Chọn tất cả {cart?.length} sản phẩm</label>
           </div>
-          <div className="overflow-y-scroll h-[750px]">
+          <div className="overflow-y-scroll h-[750px] max-md:w-full max-md:h-[500px]">
             {cart?.map((item, index) => (
-              <div key={item} className="flex items-center bg-gray-100 rounded-xl m-6 p-4">
+              <div key={item} className="flex items-center bg-gray-100 rounded-xl m-6 p-4 max-md:flex-col max-md:gap-4">
                 <div className="flex items-center flex-5 gap-4">
                   <input type="checkbox" checked={checked.find(i => i === index.toString()) ? true : false} value={index} 
                   onChange={(e) => handleSelectProduct(e,index, item)} className="h-4 w-4"/>
